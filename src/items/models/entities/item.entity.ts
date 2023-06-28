@@ -2,6 +2,7 @@ import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, U
 import * as bcrypt from 'bcryptjs';
 import { UserRole } from "src/enums/role.enum";
 import { Status } from "src/enums/status.enum";
+import { UOM } from "src/enums/uom.enum";
 
 @Entity()
 export class Item extends BaseEntity {
@@ -10,6 +11,12 @@ export class Item extends BaseEntity {
 
     @Column()
     name: string;
+
+    @Column()
+    description: string;
+
+    @Column({ type: "enum", enum: UOM, default: UOM.PC })
+    uom: UOM;
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;

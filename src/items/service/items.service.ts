@@ -33,6 +33,8 @@ export class ItemsService {
             select: {
                 id: true,
                 name: true,
+                uom: true,
+                description: true,
                 status: true,
                 created_at: true,
                 updated_at: true,
@@ -69,6 +71,8 @@ export class ItemsService {
     
         // Update item fields
         item.name = updateItemDto.name;
+        item.description = updateItemDto.description;
+        item.uom = updateItemDto.uom;
         item.status = updateItemDto.status;
     
         // Save updated item
