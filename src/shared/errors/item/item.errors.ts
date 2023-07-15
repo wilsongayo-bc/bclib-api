@@ -1,13 +1,13 @@
 export const ItemErrors = {
     Conflict: {
         statusCode: 409,
-        message: 'Email already exists',
+        message: 'Name already exists',
         error: "Conflict Error"
     },
 
     NotFound: {
         statusCode: 404,
-        message: 'Email not exists',
+        message: 'Item not exists',
         error: "NotFound Error"
     },
 

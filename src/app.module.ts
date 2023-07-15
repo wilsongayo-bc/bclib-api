@@ -26,7 +26,7 @@ import { ItemsModule } from './items/items.module';
     }),
     UsersModule,
     AuthModule,
-    ItemsModule
+    ItemsModule,
   ],
   controllers: [],
   providers: [],

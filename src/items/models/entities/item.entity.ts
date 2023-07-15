@@ -6,7 +6,7 @@ import { UOM } from "src/enums/uom.enum";
 
 @Entity()
 export class Item extends BaseEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
     @Column()
