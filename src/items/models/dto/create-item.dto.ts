@@ -15,4 +15,6 @@ export class CreateItemDto {
     uom: UOM;
 
     created_by: string;
+
+    updated_by: string;
 }

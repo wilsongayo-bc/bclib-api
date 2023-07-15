@@ -14,6 +14,7 @@ export class ItemsService {
 
     async createItem(createitemDto:CreateItemDto, username: string): Promise<Item> {
         createitemDto.created_by = username;
+        createitemDto.updated_by = username;
         createitemDto.name = createitemDto.name.toUpperCase();
 
         const itemDB = await this.findItemByName(createitemDto.name);
