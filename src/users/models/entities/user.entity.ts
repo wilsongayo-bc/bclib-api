@@ -5,7 +5,7 @@ import { Status } from "src/enums/status.enum";
 
 @Entity()
 export class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
     @Column()
