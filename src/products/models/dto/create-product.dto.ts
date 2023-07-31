@@ -14,6 +14,8 @@ export class CreateProductDto {
     @IsEnum(UOM)
     uom: UOM;
 
+    qty: number;
+
     created_by: string;
 
     updated_by: string;

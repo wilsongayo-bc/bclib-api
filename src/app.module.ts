@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
 import { ProductsModule } from './products/products.module';
+import { ProductInventoryModule } from './inventory/product/product-inventory.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { ProductsModule } from './products/products.module';
     UsersModule,
     AuthModule,
     ItemsModule,
-    ProductsModule
+    ProductsModule,
+    ProductInventoryModule
   ],
   controllers: [],
   providers: [],

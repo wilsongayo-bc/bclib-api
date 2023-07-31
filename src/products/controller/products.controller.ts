@@ -6,6 +6,7 @@ import { UpdateProductDto } from '../models/dto/update-product.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { User } from 'src/typeorm';
 import { RequestGetUser } from 'src/users/decorator/user.decorator';
+import { Status } from 'src/enums/status.enum';
 
 @Controller('products')
 @UseGuards(JwtAuthGuard)
@@ -24,6 +25,11 @@ export class ProductsController {
   @Get()
   async getAllProducts(): Promise<Product[]> {
       return this.productsService.getAllProducts();
+  }
+
+  @Get('/enabled')
+  async getAllEnabled(): Promise<Product[]> {
+      return this.productsService.getAllEnabled();
   }
 
   @Get('/:id')

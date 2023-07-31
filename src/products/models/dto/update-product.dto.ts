@@ -15,4 +15,6 @@ export class UpdateProductDto {
     uom: UOM;
 
     updated_by: string;
+    
+    qty: number;
 }
