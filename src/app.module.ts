@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
 import { ProductsModule } from './products/products.module';
 import { ProductInventoryModule } from './inventory/product/product-inventory.module';
+import { ProductInModule } from './inventory/product-in/product-in.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { ProductInventoryModule } from './inventory/product/product-inventory.mo
     AuthModule,
     ItemsModule,
     ProductsModule,
-    ProductInventoryModule
+    ProductInventoryModule,
+    ProductInModule
   ],
   controllers: [],
   providers: [],

@@ -7,7 +7,7 @@ export const ProductErrors = {
 
     NotFound: {
         statusCode: 404,
-        message: 'Product not exists',
+        message: 'Product does not exists',
         error: "NotFound Error"
     },
 
@@ -19,17 +19,29 @@ export const ProductErrors = {
 
     ProductNotFound: {
         statusCode: 404,
-        message: 'Product not exists',
+        message: 'Product does not exists',
         error: "NotFound Error"
     },
 
     ProductInventoryNotFound: {
         statusCode: 404,
-        message: 'Product Inventory not exists',
+        message: 'Product Inventory does not exists',
         error: "NotFound Error"
     },
 
     ProductInventoryConflict: {
+        statusCode: 409,
+        message: 'Product already exists',
+        error: "Conflict Error"
+    },
+
+    ProductInNotFound: {
+        statusCode: 404,
+        message: 'Product In does not exists',
+        error: "NotFound Error"
+    },
+
+    ProductInyConflict: {
         statusCode: 409,
         message: 'Product already exists',
         error: "Conflict Error"

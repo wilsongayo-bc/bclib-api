@@ -145,5 +145,15 @@ export class ProductInventoryService {
             },
         });
     }
+    
+    async updateProductIn(
+        productInventoryDB: ProductInventory): Promise<ProductInventory> {
+
+        productInventoryDB.updated_by = 'system';
+        
+        // Save updated product inventory
+        await this.productInventoryRepository.save(productInventoryDB);
+        return productInventoryDB;
+    }
 }
 
