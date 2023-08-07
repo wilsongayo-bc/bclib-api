@@ -5,9 +5,8 @@ export class CreateProductInventoryDto {
     @IsNotEmptyObject({ nullable: false })
     product: Product
 
-    @IsEmpty()
-    product_name: string;
-
+    balance_begin: number;
+    
     balance_end: number;
 
     created_by: string;

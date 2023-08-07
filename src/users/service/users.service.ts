@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../models/entities/user.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateUserDto } from '../models/dto/create-user.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { UserErrors } from 'src/shared/errors/user/user.errors';
@@ -37,7 +37,8 @@ export class UsersService {
                     updated_at: true,
                     created_by: true,
                     updated_by: true
-                }
+                },
+                where: { id: Not(1) }
             });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);

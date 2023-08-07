@@ -21,12 +21,12 @@ export class ProductInventoryController {
     return this.productInventoryService.create(createProductInventoryDto, user.username);
   }
 
-  @Get()
-  async getAll(): Promise<ProductInventory[]> {
-      return this.productInventoryService.getAll();
+  @Get(':filterDate')
+  async getAll(@Param('filterDate') filterDate: Date): Promise<ProductInventory[]> {
+    return this.productInventoryService.getAll(filterDate);
   }
 
-  @Get('/:id')
+  @Get('/edit/:id')
   async getById(@Param('id') id: number): Promise<ProductInventory>{
       return await this.productInventoryService.findById(id);
   }

@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Between, Equal, LessThan, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { ProductErrors } from 'src/shared/errors/product/product.errors';
 import { ProductInventory } from '../models/entities/product-inventory.entity';
@@ -20,14 +20,15 @@ export class ProductInventoryService {
     async create(createProductInventoryDto:CreateProductInventoryDto, username: string): Promise<ProductInventory> {
         createProductInventoryDto.created_by = username;
         createProductInventoryDto.updated_by = username;
-
+        
         // get product
-        const productDB = await this.productsService.findProductByName(createProductInventoryDto.product_name);
+        const productDB = await this.productsService.findProductById(createProductInventoryDto.product.id);
         if(!productDB){
             throw new NotFoundException(ProductErrors.ProductNotFound);
         } 
 
         createProductInventoryDto.product = productDB;
+        createProductInventoryDto.balance_begin = productDB.qty; //set balance begin from product qty
 
         // check product and date today if already added in the inventory
         const productInventoryDB = await this.findByProduct(productDB.id);
@@ -38,15 +39,15 @@ export class ProductInventoryService {
         const productInventory = await this.productInventoryRepository.create(createProductInventoryDto);
         await productInventory.save();
         
-        productDB.qty = productInventory.balance_end;
-        await this.productsService.updateProductQty(productDB);
+        // productDB.qty = productInventory.balance_end;
+        // await this.productsService.updateProductQty(productDB);
 
         return productInventory;
     }
 
     /* get all product inventory */
-    async getAll(): Promise<ProductInventory[]> {
-        const today = new Date();
+    async getAll(filterDate: Date): Promise<ProductInventory[]> {
+        const today = new Date(filterDate);
         today.setHours(0, 0, 0, 0);
 
         const tomorrow = new Date(today);
@@ -68,9 +69,10 @@ export class ProductInventoryService {
                 updated_by: true
             },
             relations:['product'],
-            // where: {
-            //     transaction_date: Between(today, tomorrow),
-            // },
+            order: { transaction_date: "DESC" },
+            where: {
+                transaction_date: Between(today, tomorrow),
+            },
            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -86,7 +88,7 @@ export class ProductInventoryService {
         if(!productInventory){
             throw new NotFoundException(ProductErrors.ProductInventoryNotFound);
         } 
-
+        
         try {
             return await productInventory;
         } catch (err) {
@@ -119,6 +121,7 @@ export class ProductInventoryService {
         // Save updated 
         await this.productInventoryRepository.save(productInventory);
 
+        // get product and set qty from product inventory balance end
         const productDB = await this.productsService.findProductById(productInventory.product.id);
         productDB.qty = productInventory.balance_end;
         await this.productsService.updateProductQty(productDB);
