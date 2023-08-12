@@ -42,7 +42,7 @@ export class ProductInService {
 
         // update product inventories product_in
         prodInv.product_in += productIn.qty;
-        await this.productInventoryService.updateProductIn(prodInv);
+        await this.productInventoryService.updateProductInventory(prodInv);
 
         // update product set qty from product inventory balance end
         productDB.qty = prodInv.balance_end;

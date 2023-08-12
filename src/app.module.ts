@@ -10,6 +10,7 @@ import { ItemsModule } from './items/items.module';
 import { ProductsModule } from './products/products.module';
 import { ProductInventoryModule } from './inventory/product/product-inventory.module';
 import { ProductInModule } from './inventory/product-in/product-in.module';
+import { OrderModule } from './orders/order.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { ProductInModule } from './inventory/product-in/product-in.module';
     ItemsModule,
     ProductsModule,
     ProductInventoryModule,
-    ProductInModule
+    ProductInModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

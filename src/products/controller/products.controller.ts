@@ -32,6 +32,11 @@ export class ProductsController {
       return this.productsService.getAllEnabled();
   }
 
+  @Get('/enabled-qty')
+  async getAllEnabledQty(): Promise<Product[]> {
+      return this.productsService.getAllEnabledQty();
+  }
+
   @Get('/:id')
   async getProductById(@Param('id') id: number): Promise<Product>{
       return await this.productsService.findProductById(id);

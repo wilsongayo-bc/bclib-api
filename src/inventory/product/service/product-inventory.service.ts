@@ -146,7 +146,7 @@ export class ProductInventoryService {
         });
     }
     
-    async updateProductIn(
+    async updateProductInventory(
         productInventoryDB: ProductInventory): Promise<ProductInventory> {
 
         productInventoryDB.updated_by = 'system';

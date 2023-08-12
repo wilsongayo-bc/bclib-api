@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from '../models/entities/product.entity';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { CreateProductDto } from '../models/dto/create-product.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { ProductErrors } from 'src/shared/errors/product/product.errors';
@@ -43,6 +43,19 @@ export class ProductsService {
             return await this.productRepository.find({
                 where: {
                     status: Status.ENABLED,
+                },
+            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+    async getAllEnabledQty(): Promise<Product[]> {
+        try {
+            return await this.productRepository.find({
+                where: {
+                    status: Status.ENABLED,
+                    qty: MoreThan(0)
                 },
             });
         } catch (err) {

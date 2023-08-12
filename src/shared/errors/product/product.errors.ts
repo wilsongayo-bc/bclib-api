@@ -25,7 +25,7 @@ export const ProductErrors = {
 
     ProductInventoryNotFound: {
         statusCode: 404,
-        message: 'Product Inventory does not exists',
+        message: 'Product Inventory not yet created',
         error: "NotFound Error"
     },
 
