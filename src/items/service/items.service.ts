@@ -12,12 +12,14 @@ export class ItemsService {
 
     constructor(@InjectRepository(Item) private itemRepository: Repository<Item>) { }
 
-    async createItem(createitemDto:CreateItemDto): Promise<Item> {
+    async createItem(createitemDto:CreateItemDto, username: string): Promise<Item> {
+        createitemDto.created_by = username;
+        createitemDto.updated_by = username;
         createitemDto.name = createitemDto.name.toUpperCase();
 
         const itemDB = await this.findItemByName(createitemDto.name);
         if(itemDB){
-            throw new NotFoundException(ItemErrors.ItemNotFound);
+            throw new NotFoundException(ItemErrors.Conflict);
         } 
 
         const item = await this.itemRepository.create(createitemDto);
@@ -33,6 +35,8 @@ export class ItemsService {
             select: {
                 id: true,
                 name: true,
+                uom: true,
+                description: true,
                 status: true,
                 created_at: true,
                 updated_at: true,
@@ -60,7 +64,11 @@ export class ItemsService {
         
     }
 
-    async updateItem(itemId: number, updateItemDto: UpdateItemDto): Promise<Item> {
+    async updateItem(
+        itemId: number, 
+        updateItemDto: UpdateItemDto, 
+        username: string): Promise<Item> 
+    {
         const item = await this.itemRepository.findOne({where: {id: itemId}});
     
         if (!item) {
@@ -69,7 +77,10 @@ export class ItemsService {
     
         // Update item fields
         item.name = updateItemDto.name;
+        item.description = updateItemDto.description;
+        item.uom = updateItemDto.uom;
         item.status = updateItemDto.status;
+        item.updated_by = username;
     
         // Save updated item
         await this.itemRepository.save(item);

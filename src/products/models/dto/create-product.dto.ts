@@ -1,9 +1,8 @@
 import { IsEnum, IsNotEmpty } from 'class-validator';
-import { UserRole } from 'src/enums/role.enum';
 import { Status } from 'src/enums/status.enum';
 import { UOM } from 'src/enums/uom.enum';
 
-export class UpdateItemDto {
+export class CreateProductDto {
     @IsNotEmpty()
     name: string;
 
@@ -14,6 +13,10 @@ export class UpdateItemDto {
 
     @IsEnum(UOM)
     uom: UOM;
+
+    qty: number;
+
+    created_by: string;
 
     updated_by: string;
 }

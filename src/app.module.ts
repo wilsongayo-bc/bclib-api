@@ -7,6 +7,10 @@ import entities from './typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
+import { ProductsModule } from './products/products.module';
+import { ProductInventoryModule } from './inventory/product/product-inventory.module';
+import { ProductInModule } from './inventory/product-in/product-in.module';
+import { OrderModule } from './orders/order.module';
 
 @Module({
   imports: [
@@ -26,7 +30,11 @@ import { ItemsModule } from './items/items.module';
     }),
     UsersModule,
     AuthModule,
-    ItemsModule
+    ItemsModule,
+    ProductsModule,
+    ProductInventoryModule,
+    ProductInModule,
+    OrderModule,
   ],
   controllers: [],
   providers: [],

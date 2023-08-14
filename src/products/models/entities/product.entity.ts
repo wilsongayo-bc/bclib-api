@@ -1,11 +1,10 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
-import * as bcrypt from 'bcryptjs';
-import { UserRole } from "src/enums/role.enum";
 import { Status } from "src/enums/status.enum";
 import { UOM } from "src/enums/uom.enum";
+import { ColumnNumericTransformer } from "src/utils/helper";
 
 @Entity()
-export class Item extends BaseEntity {
+export class Product extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
@@ -20,6 +19,12 @@ export class Item extends BaseEntity {
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    qty: number; // Sold
 
     @Column()
     @CreateDateColumn()
