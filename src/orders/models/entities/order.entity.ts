@@ -1,3 +1,4 @@
+import { PaymentType } from "src/enums/order.enum";
 import { ColumnNumericTransformer } from "src/utils/helper";
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, AfterLoad, BeforeUpdate } from "typeorm";
 import { OrderDetail } from "./order-detail.entity";
@@ -12,7 +13,7 @@ export class Order extends BaseEntity {
 
     @Column({ default : '' })
     address: string;
-
+    
     @Column({ default : '' })
     business_name: string;
 
@@ -49,6 +50,9 @@ export class Order extends BaseEntity {
 
     @Column("longtext")
     description: string;
+
+    @Column({ type: "enum", enum: PaymentType, default: PaymentType.CASH })
+    payment_type: PaymentType;
 
     @Column()
     @CreateDateColumn()

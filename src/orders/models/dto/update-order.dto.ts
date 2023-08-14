@@ -1,4 +1,5 @@
-import { IsEmpty, IsNotEmptyObject } from 'class-validator';
+import { IsNotEmptyObject } from 'class-validator';
+import { PaymentType } from 'src/enums/order.enum';
 import { Product } from 'src/typeorm';
 
 export class UpdateOrderDto {
@@ -14,6 +15,8 @@ export class UpdateOrderDto {
     or_number: string;
 
     description: string;
+
+    payment_type: PaymentType;
 
     created_by: string;
 
