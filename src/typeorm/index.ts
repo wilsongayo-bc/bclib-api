@@ -1,3 +1,4 @@
+import { Bank } from "src/banks/models/entities/bank.entity";
 import { ProductIn } from "src/inventory/product-in/models/entities/product-in.entity";
 import { ProductInventory } from "src/inventory/product/models/entities/product-inventory.entity";
 import { Item } from "src/items/models/entities/item.entity";
@@ -13,7 +14,8 @@ const entities = [
   ProductInventory,
   ProductIn,
   Order,
-  OrderDetail
+  OrderDetail,
+  Bank
 ];
 
 export {
@@ -23,7 +25,8 @@ export {
   ProductInventory,
   ProductIn,
   Order,
-  OrderDetail
+  OrderDetail,
+  Bank
 };
 
 export default entities;
