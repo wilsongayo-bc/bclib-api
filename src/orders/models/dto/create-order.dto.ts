@@ -1,4 +1,4 @@
-import { PaymentType } from "src/enums/order.enum";
+import { OrderType, PaymentType } from "src/enums/order.enum";
 
 export class CreateOrderDto {
     ordered_to: string;
@@ -10,6 +10,8 @@ export class CreateOrderDto {
     or_number: string;
 
     payment_type: PaymentType;
+
+    order_type: OrderType;
 
     created_by: string;
 

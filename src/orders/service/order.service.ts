@@ -42,6 +42,7 @@ export class OrderService {
                 ordered_to: true,
                 total_amount: true,
                 payment_type: true,
+                order_type: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,
@@ -102,6 +103,7 @@ export class OrderService {
         order.or_number = updateOrderDto.or_number;
         order.description = updateOrderDto.description;
         order.payment_type = updateOrderDto.payment_type;
+        order.order_type = updateOrderDto.order_type;
 
         // Save updated 
         await this.orderRepository.save(order);

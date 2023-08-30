@@ -6,6 +6,7 @@ import { CreateBankDto } from '../models/dto/create-bank.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { BankErrors } from 'src/shared/errors/bank/bank.errors';
 import { UpdateBankDto } from '../models/dto/update-bank.dto';
+import { Status } from 'src/enums/status.enum';
 
 @Injectable()
 export class BanksService {
@@ -43,6 +44,18 @@ export class BanksService {
                 updated_by: true
             }
            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+    async getAllEnabled(): Promise<Bank[]> {
+        try {
+            return await this.bankRepository.find({
+                where: {
+                    status: Status.ENABLED,
+                },
+            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
         }

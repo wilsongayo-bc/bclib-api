@@ -26,6 +26,11 @@ export class BanksController {
       return this.banksService.getAllBanks();
   }
 
+  @Get('/enabled')
+  async getAllEnabled(): Promise<Bank[]> {
+      return this.banksService.getAllEnabled();
+  }
+
   @Get('/:id')
   async getBankById(@Param('id') id: number): Promise<Bank>{
       return await this.banksService.findBankById(id);

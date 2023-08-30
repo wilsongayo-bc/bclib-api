@@ -1,6 +1,6 @@
-import { PaymentType } from "src/enums/order.enum";
+import { OrderType, PaymentType } from "src/enums/order.enum";
 import { ColumnNumericTransformer } from "src/utils/helper";
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany, AfterLoad, BeforeUpdate } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, AfterLoad, BeforeUpdate } from "typeorm";
 import { OrderDetail } from "./order-detail.entity";
 
 @Entity()
@@ -50,6 +50,9 @@ export class Order extends BaseEntity {
 
     @Column("longtext")
     description: string;
+
+    @Column({ type: "enum", enum: OrderType, default: OrderType.DINEIN })
+    order_type: OrderType;
 
     @Column({ type: "enum", enum: PaymentType, default: PaymentType.CASH })
     payment_type: PaymentType;
