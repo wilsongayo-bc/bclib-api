@@ -63,6 +63,7 @@ export class ProductInventoryService {
                 total: true,
                 product_out: true,
                 balance_end: true,
+                total_prices: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,

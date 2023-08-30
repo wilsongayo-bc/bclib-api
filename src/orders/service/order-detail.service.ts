@@ -49,6 +49,7 @@ export class OrderDetailService {
         await orderDetail.save();
 
         prodInv.product_out += orderDetail.qty;
+        prodInv.total_prices += orderDetail.total;
         await this.productInventoryService.updateProductInventory(prodInv);
 
         // get order
@@ -158,6 +159,7 @@ export class OrderDetailService {
         // update product inventory in
         const prodInv = await this.productInventoryService.findByProduct(orderDetail.product.id);
         prodInv.product_out -= orderDetail.qty;
+        prodInv.total_prices -= orderDetail.total;
         await this.productInventoryService.updateProductInventory(prodInv);
 
         const productDB = await this.productsService.findProductById(orderDetail.product.id);

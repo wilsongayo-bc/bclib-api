@@ -26,6 +26,9 @@ export class Product extends BaseEntity {
     })
     qty: number; // Sold
 
+    @Column("simple-array")
+    prices: number[];
+
     @Column()
     @CreateDateColumn()
     created_at: Date;

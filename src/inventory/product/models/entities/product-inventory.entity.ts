@@ -46,6 +46,12 @@ export class ProductInventory extends BaseEntity {
     })
     product_out: number; // Sold
 
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    total_prices: number; // Total Prices
+
     @Column()
     @CreateDateColumn()
     created_at: Date;

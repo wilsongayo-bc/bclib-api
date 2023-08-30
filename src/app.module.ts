@@ -11,6 +11,7 @@ import { ProductsModule } from './products/products.module';
 import { ProductInventoryModule } from './inventory/product/product-inventory.module';
 import { ProductInModule } from './inventory/product-in/product-in.module';
 import { OrderModule } from './orders/order.module';
+import { BanksModule } from './banks/banks.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { OrderModule } from './orders/order.module';
     ProductInventoryModule,
     ProductInModule,
     OrderModule,
+    BanksModule
   ],
   controllers: [],
   providers: [],
