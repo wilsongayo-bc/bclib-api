@@ -7,6 +7,8 @@ export class UpdateBankDto {
 
     description: string;
 
+    location: string;
+
     @IsEnum(Status)
     status: Status;
 

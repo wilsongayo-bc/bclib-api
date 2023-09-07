@@ -38,6 +38,7 @@ export class BanksService {
                 name: true,
                 description: true,
                 status: true,
+                location: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,
@@ -90,6 +91,7 @@ export class BanksService {
         // Update bank fields
         bank.name = updateBankDto.name;
         bank.description = updateBankDto.description;
+        bank.location = updateBankDto.location;
         bank.status = updateBankDto.status;
         bank.updated_by = username;
     

@@ -1,6 +1,6 @@
 import { OrderType, PaymentType } from "src/enums/order.enum";
 import { ColumnNumericTransformer } from "src/utils/helper";
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, AfterLoad, BeforeUpdate } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToMany, AfterLoad, BeforeUpdate, ManyToOne } from "typeorm";
 import { OrderDetail } from "./order-detail.entity";
 
 @Entity()
@@ -56,6 +56,27 @@ export class Order extends BaseEntity {
 
     @Column({ type: "enum", enum: PaymentType, default: PaymentType.CASH })
     payment_type: PaymentType;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    total_cash: number;
+
+    @Column()
+    credit_card: boolean;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    credit_card_amount: number;
+
+    @Column({ default : '' })
+    credit_card_bank: string
+
+    @Column({ default : '' })
+    credit_card_ref_num: string;
 
     @Column()
     @CreateDateColumn()
