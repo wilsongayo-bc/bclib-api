@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Between, Repository } from 'typeorm';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
@@ -16,10 +16,20 @@ export class OrderService {
     ) { }
 
     async create(createOrderDto:CreateOrderDto, username: string): Promise<Order> {
+        console.log('create order')
+
+        let order = await this.orderRepository.findOne({ 
+            where: {or_number: createOrderDto.or_number}
+        });
+
+        if(order){
+            throw new ConflictException(OrderErrors.ConflictOrNumber);
+        } 
+
         createOrderDto.created_by = username;
         createOrderDto.updated_by = username;
         
-        const order = await this.orderRepository.create(createOrderDto);
+        order = await this.orderRepository.create(createOrderDto);
         await order.save();
 
         return order;
@@ -43,6 +53,11 @@ export class OrderService {
                 total_amount: true,
                 payment_type: true,
                 order_type: true,
+                total_cash: true,
+                credit_card: true,
+                credit_card_amount: true,
+                credit_card_bank: true,
+                credit_card_ref_num: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,
@@ -51,7 +66,7 @@ export class OrderService {
             order: { transaction_date: "DESC" },
             where: {
                 transaction_date: Between(today, tomorrow),
-            },
+            }
            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -104,6 +119,11 @@ export class OrderService {
         order.description = updateOrderDto.description;
         order.payment_type = updateOrderDto.payment_type;
         order.order_type = updateOrderDto.order_type;
+        order.total_cash = updateOrderDto.total_cash;
+        order.credit_card = updateOrderDto.credit_card;
+        order.credit_card_amount = updateOrderDto.credit_card_amount;
+        order.credit_card_bank = updateOrderDto.credit_card_bank;
+        order.credit_card_ref_num = updateOrderDto.credit_card_ref_num;
 
         // Save updated 
         await this.orderRepository.save(order);

@@ -10,5 +10,11 @@ export const OrderErrors = {
         message: 'Quantity must not exceed with actual quantity from product!!!',
         error: "Conflict Error"
     },
+
+    ConflictOrNumber: {
+        statusCode: 409,
+        message: 'OR Number already exists!!!',
+        error: "Conflict Error"
+    },
     
 }
