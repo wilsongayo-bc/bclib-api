@@ -53,7 +53,10 @@ export class OrderService {
                 total_amount: true,
                 payment_type: true,
                 order_type: true,
-                total_cash: true,
+                cash_amount: true,
+                gcash_amount: true,
+                grab_amount: true,
+                panda_amount: true,
                 credit_card: true,
                 credit_card_amount: true,
                 credit_card_bank: true,
@@ -119,7 +122,10 @@ export class OrderService {
         order.description = updateOrderDto.description;
         order.payment_type = updateOrderDto.payment_type;
         order.order_type = updateOrderDto.order_type;
-        order.total_cash = updateOrderDto.total_cash;
+        order.cash_amount = updateOrderDto.cash_amount;
+        order.gcash_amount = updateOrderDto.gcash_amount;
+        order.grab_amount = updateOrderDto.grab_amount;
+        order.panda_amount = updateOrderDto.panda_amount;
         order.credit_card = updateOrderDto.credit_card;
         order.credit_card_amount = updateOrderDto.credit_card_amount;
         order.credit_card_bank = updateOrderDto.credit_card_bank;
