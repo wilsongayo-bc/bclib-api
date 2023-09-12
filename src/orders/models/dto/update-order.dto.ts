@@ -20,7 +20,13 @@ export class UpdateOrderDto {
 
     order_type: OrderType;
 
-    total_cash: number;
+    cash_amount: number;
+
+    gcash_amount: number;
+
+    grab_amount: number;
+
+    panda_amount: number;
     
     credit_card: boolean;
 

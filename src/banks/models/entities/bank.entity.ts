@@ -16,9 +16,6 @@ export class Bank extends BaseEntity {
     status: Status;
 
     @Column()
-    location: string;
-
-    @Column()
     @CreateDateColumn()
     created_at: Date;
 

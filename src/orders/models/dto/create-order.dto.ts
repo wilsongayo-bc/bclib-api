@@ -1,5 +1,4 @@
 import { OrderType, PaymentType } from "src/enums/order.enum";
-import { Bank } from "src/typeorm";
 
 export class CreateOrderDto {
     ordered_to: string;
@@ -11,6 +10,12 @@ export class CreateOrderDto {
     or_number: string;
 
     payment_type: PaymentType;
+
+    gcash_amount: number;
+
+    grab_amount: number;
+
+    panda_amount: number;
 
     order_type: OrderType;
 

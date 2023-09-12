@@ -61,7 +61,25 @@ export class Order extends BaseEntity {
         precision: 11, scale: 2, default: 0,
         transformer: new ColumnNumericTransformer(),
     })
-    total_cash: number;
+    cash_amount: number;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    gcash_amount: number;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    grab_amount: number;
+
+    @Column("decimal", {
+        precision: 11, scale: 2, default: 0,
+        transformer: new ColumnNumericTransformer(),
+    })
+    panda_amount: number;
 
     @Column()
     credit_card: boolean;
