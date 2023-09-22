@@ -1,8 +1,8 @@
 {
-  "name": "aabbq-api",
+  "name": "bclib-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Benedict College Library System",
+  "author": "Wilson Gayo",
   "private": true,
   "license": "MIT",
   "scripts": {
