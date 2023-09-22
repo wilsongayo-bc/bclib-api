@@ -1,0 +1,26 @@
+INSERT INTO `bclib-api`.`user`
+(`id`,
+`first_name`,
+`last_name`,
+`username`,
+`email`,
+`password`,
+`role`,
+`status`,
+`created_at`,
+`updated_at`,
+`created_by`,
+`updated_by`)
+VALUES
+(1,
+'Admin',
+'Admin',
+'admin',
+'admin@email.com',
+'$2a$08$cqSSHiRZbt.jVKZ8hmW8veMNbvt6HtxCiZLFtkcFnnlUCiNDQAOhi',
+'User',
+'Enabled',
+'2023-09-15 10:21:23.229342',
+'2023-09-15 10:21:23.229342',
+'system',
+'system');

@@ -1,6 +1,6 @@
 DROP TABLE 
-    `aabbq-api`.`order`, 
-    `aabbq-api`.`order_detail`, 
-    `aabbq-api`.`product`, 
-    `aabbq-api`.`product_in`, 
-    `aabbq-api`.`product_inventory`;
+    `bclib-api`.`order`, 
+    `bclib-api`.`order_detail`, 
+    `bclib-api`.`product`, 
+    `bclib-api`.`product_in`, 
+    `bclib-api`.`product_inventory`;
