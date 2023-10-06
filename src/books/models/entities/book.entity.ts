@@ -1,5 +1,6 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne } from "typeorm";
 import { Status } from "src/enums/status.enum";
+import { Author, Category, Publisher } from "src/typeorm";
 
 @Entity()
 export class Book extends BaseEntity {
@@ -14,6 +15,19 @@ export class Book extends BaseEntity {
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
+
+    @ManyToOne(() => Author, (author) => author)
+    author: Author
+
+    @ManyToOne(() => Category, (category) => category)
+    category: Category
+
+    @ManyToOne(() => Publisher, (publisher) => publisher)
+    publisher: Publisher
+    
+    // Accession Book No
+    @Column()
+    access_book_num: string;
 
     @Column()
     @CreateDateColumn()
