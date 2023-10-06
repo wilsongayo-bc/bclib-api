@@ -21,8 +21,28 @@ export class CreateBookDto {
     publisher: Publisher
 
     access_book_num: string;
+
+    number:number;
     
+    classs: string;
+     
+    title: string;
+
+    edition: string;
+    
+    volumes: string;
+
+    pages: string;
+
+    source_of_fund: string;
+
+    cost_price: number;
+
+    year: string;
+
+    remarks: string; 
+
     created_by: string;
 
-    updated_by: string;
+    updated_by: string; 
 }

@@ -38,6 +38,16 @@ export class BooksService {
                 description: true,
                 status: true,
                 access_book_num: true,
+                number: true,
+                classs: true,
+                title: true,
+                edition: true,
+                volumes: true,
+                pages: true,
+                source_of_fund: true,
+                cost_price: true,
+                year: true,
+                remarks: true,  
                 created_at: true,
                 updated_at: true,
                 created_by: true,
@@ -87,6 +97,16 @@ export class BooksService {
         book.category = updateBookDto.category;
         book.publisher = updateBookDto.publisher;
         book.access_book_num = updateBookDto.access_book_num;
+        book.number = updateBookDto.number;
+        book.classs = updateBookDto.classs;
+        book.title = updateBookDto.title;
+        book.edition = updateBookDto.edition;
+        book.volumes = updateBookDto.volumes;
+        book.pages = updateBookDto.pages;
+        book.source_of_fund = updateBookDto.source_of_fund;
+        book.cost_price = updateBookDto.cost_price;
+        book.year = updateBookDto.year;
+        book.remarks = updateBookDto.remarks; 
         book.updated_by = username;
     
         // Save updated book
