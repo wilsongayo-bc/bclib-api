@@ -37,11 +37,13 @@ export class BooksService {
                 name: true,
                 description: true,
                 status: true,
+                access_book_num: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,
                 updated_by: true
-            }
+            },
+            relations:['author', 'category', 'publisher'],
            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -50,7 +52,10 @@ export class BooksService {
 
     /* find book by id */
     async findBookById(id:number): Promise<Book> {
-        const book = await this.bookRepository.findOne({where: {id: id}});
+        const book = await this.bookRepository.findOne({
+            where: {id: id},
+            relations:['author', 'category', 'publisher']
+        });
         if(!book){
             throw new NotFoundException(BookErrors.BookNotFound);
         } 
@@ -78,6 +83,10 @@ export class BooksService {
         book.name = updateBookDto.name;
         book.description = updateBookDto.description;
         book.status = updateBookDto.status;
+        book.author = updateBookDto.author;
+        book.category = updateBookDto.category;
+        book.publisher = updateBookDto.publisher;
+        book.access_book_num = updateBookDto.access_book_num;
         book.updated_by = username;
     
         // Save updated book
