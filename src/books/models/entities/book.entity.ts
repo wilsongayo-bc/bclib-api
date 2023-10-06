@@ -28,6 +28,39 @@ export class Book extends BaseEntity {
     // Accession Book No
     @Column()
     access_book_num: string;
+    
+    @Column()
+    number: number;
+    
+    @Column()
+    classs: string; 
+    
+    @Column()
+    title: string;
+     
+    @Column()
+    edition: string;
+   
+    @Column()
+    volumes: string;
+
+    @Column()
+    pages: string;
+
+    @Column()
+    source_of_fund: string;
+  
+    @Column()
+    cost_price: number;
+
+    @Column()
+    year: string;
+
+    @Column()
+    remarks: string; 
+
+    @Column()
+    created_by: string;
 
     @Column()
     @CreateDateColumn()
@@ -36,9 +69,6 @@ export class Book extends BaseEntity {
     @Column()
     @UpdateDateColumn()
     updated_at: Date;
-
-    @Column()
-    created_by: string;
 
     @Column()
     updated_by: string;
