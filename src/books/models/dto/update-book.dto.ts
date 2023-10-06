@@ -21,6 +21,28 @@ export class UpdateBookDto {
     description: string;
 
     access_book_num: string;
+    
+    number: number;
+    
+    classs: string;
+    
+    title: string;
 
-    updated_by: string;
+    edition: string;
+    
+    volumes: string;
+
+    pages: string;
+
+    source_of_fund: string;
+
+    cost_price: number;
+
+    year: string;
+
+    remarks: string;
+
+    created_by: string;
+
+    updated_by: string; 
 }
