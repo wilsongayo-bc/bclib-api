@@ -12,15 +12,16 @@ export class StudentsService {
 
     constructor(@InjectRepository(Student) private studentRepository: Repository<Student>) { }
 
-    async createStudent(createstudentDto:CreateStudentDto, username: string): Promise<Student> {
+    async createStudent(createstudentDto: CreateStudentDto, username: string): Promise<Student> {
         createstudentDto.created_by = username;
         createstudentDto.updated_by = username;
-        createstudentDto.name = createstudentDto.name.toUpperCase();
+        createstudentDto.full_name = createstudentDto.full_name.toUpperCase(); //name changed to full_name
 
-        const studentDB = await this.findStudentByName(createstudentDto.name);
-        if(studentDB){
+        const studentDB = await this.findStudentByName(createstudentDto.full_name); //name changed to full_name
+
+        if (studentDB) {
             throw new NotFoundException(StudentErrors.Conflict);
-        } 
+        }
 
         const student = await this.studentRepository.create(createstudentDto);
         await student.save();
@@ -31,62 +32,76 @@ export class StudentsService {
     /* get all students */
     async getAllStudents(): Promise<Student[]> {
         try {
-           return await this.studentRepository.find({
-            select: {
-                id: true,
-                name: true,
-                status: true,
-                created_at: true,
-                updated_at: true,
-                created_by: true,
-                updated_by: true
-            }
-           });
+            return await this.studentRepository.find({
+                select: {
+                    id: true,
+                    //name: true,
+                    student_id: true,
+                    first_name: true,
+                    last_name: true,
+                    full_name: true,
+                    year_level: true,
+                    enrollment_date: true,
+                    status: true,
+                    created_at: true,
+                    updated_at: true,
+                    created_by: true,
+                    updated_by: true
+                },
+            relations: ['course'],
+            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
         }
     }
 
     /* find student by id */
-    async findStudentById(id:number): Promise<Student> {
-        const student = await this.studentRepository.findOne({where: {id: id}});
-        if(!student){
+    async findStudentById(id: number): Promise<Student> {
+        const student = await this.studentRepository.findOne({ where: { id: id },
+            relations:['course']
+        });
+        if (!student) {
             throw new NotFoundException(StudentErrors.StudentNotFound);
-        } 
+        }
 
         try {
             return await student;
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
         }
-        
+
     }
 
     async updateStudent(
-        studentId: number, 
-        updateStudentDto: UpdateStudentDto, 
-        username: string): Promise<Student> 
-    {
-        const student = await this.studentRepository.findOne({where: {id: studentId}});
-    
+        studentId: number,
+        updateStudentDto: UpdateStudentDto,
+        username: string): Promise<Student> {
+        const student = await this.studentRepository.findOne({ where: { id: studentId } });
+
         if (!student) {
-          throw new NotFoundException(StudentErrors.StudentNotFound);
+            throw new NotFoundException(StudentErrors.StudentNotFound);
         }
-    
+
         // Update student fields
-        student.name = updateStudentDto.name;
+        student.student_id = updateStudentDto.student_id;
+        student.first_name = updateStudentDto.first_name;
+        student.last_name = updateStudentDto.last_name;
+        student.full_name = updateStudentDto.full_name; 
+        student.year_level = updateStudentDto.year_level;
+        student.enrollment_date = updateStudentDto.Enrollment_date;
         student.status = updateStudentDto.status;
+        student.course = updateStudentDto.course;
         student.updated_by = username;
-    
+
         // Save updated student
         await this.studentRepository.save(student);
         return student;
-      }
+    }
 
     async findStudentByName(studentName: string) {
         return await Student.findOne({
             where: {
-                name: studentName,
+                full_name: studentName, // name changed to fullname 
             },
         });
     }

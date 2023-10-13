@@ -7,8 +7,8 @@ export class Book extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column()
-    name: string;
+   /* @Column()
+    name: string; */ 
 
     @Column()
     description: string;
@@ -30,10 +30,10 @@ export class Book extends BaseEntity {
     access_book_num: string;
     
     @Column()
-    number: number;
+    author_number: string;
     
     @Column()
-    classs: string; 
+    classification: string; 
     
     @Column()
     title: string;

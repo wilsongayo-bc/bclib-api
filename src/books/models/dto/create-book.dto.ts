@@ -3,8 +3,8 @@ import { Status } from 'src/enums/status.enum';
 import { Author, Category, Publisher } from 'src/typeorm';
 
 export class CreateBookDto {
-    @IsNotEmpty()
-    name: string;
+  /*  @IsNotEmpty()
+    name: string; */
 
     @IsEnum(Status)
     status: Status;
@@ -22,9 +22,9 @@ export class CreateBookDto {
 
     access_book_num: string;
 
-    number:number;
+    author_number:string;
     
-    classs: string;
+    classification:string;
      
     title: string;
 

@@ -1,6 +1,9 @@
 import { Author } from "src/author/models/entities/author.entity";
 import { Book } from "src/books/models/entities/book.entity";
+import { BorrowRecord } from "src/borrower-record/models/entities/borrow-record.entity";
 import { Category } from "src/category/models/entities/category.entity";
+import { Course } from "src/course/models/entities/course.entity";
+import { Employee } from "src/employee/models/entities/employee.entity";
 import { Publisher } from "src/publisher/models/entities/publisher.entity";
 import { Student } from "src/students/models/entities/student.entity";
 import { User } from "src/users/models/entities/user.entity";
@@ -11,7 +14,10 @@ const entities = [
   Student,
   Category,
   Author,
-  Publisher
+  Publisher,
+  Course,
+  Employee,
+  BorrowRecord
 ];
 
 export {
@@ -20,7 +26,10 @@ export {
   Student,
   Category,
   Author,
-  Publisher
+  Publisher,
+  Course,
+  Employee,
+  BorrowRecord
 };
 
 export default entities;

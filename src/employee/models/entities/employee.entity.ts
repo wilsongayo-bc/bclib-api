@@ -3,10 +3,7 @@ import { Status } from "src/enums/status.enum";
 import { Course } from "src/typeorm";
 
 @Entity()
-export class Student extends BaseEntity {
-    toUpperCase(): Student {
-        throw new Error('Method not implemented.');
-    }
+export class Employee extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
     /*
@@ -14,7 +11,7 @@ export class Student extends BaseEntity {
     first_name: string; */
  
     @Column({ unique: true })
-    student_id: string;
+    employee_id: string;
 
     @Column()
     first_name: string;
@@ -27,12 +24,6 @@ export class Student extends BaseEntity {
 
     @ManyToOne(() => Course, (course) => course)
     course: Course
-
-    @Column()
-    year_level: string;
-
-    @Column()
-    enrollment_date: Date;
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
