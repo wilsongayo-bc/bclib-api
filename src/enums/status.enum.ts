@@ -9,7 +9,7 @@ export enum borrower_type{
 }
 
 export enum BookStatus{
-    CHECKEDOUT = 'Cheked out',
+    CHECKEDOUT = 'CheckedOut',
     RETURN = 'returned'
 }
 
