@@ -22,7 +22,8 @@ export class StudentsService {
         if (studentDB) {
             throw new NotFoundException(StudentErrors.Conflict);
         }
-
+        createstudentDto.full_name = createstudentDto.first_name + ' ' + createstudentDto.last_name;
+        createstudentDto.full_name.toUpperCase();
         const student = await this.studentRepository.create(createstudentDto);
         await student.save();
 

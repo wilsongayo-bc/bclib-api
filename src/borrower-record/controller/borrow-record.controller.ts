@@ -7,7 +7,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { User } from 'src/typeorm';
 import { RequestGetUser } from 'src/users/decorator/user.decorator';
 
-@Controller('students')
+@Controller('borrow-records')
 @UseGuards(JwtAuthGuard)
 export class BorrowRecordController {
 

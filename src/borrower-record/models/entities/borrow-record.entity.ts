@@ -7,7 +7,7 @@ export class BorrowRecord extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column({ type: "enum", enum: borrower_type, default: borrower_type.EMPLOYEE })
+    @Column({ type: "enum", enum: borrower_type, default: borrower_type.STUDENT })
     borrower_type: borrower_type;
 
     @ManyToOne(() => Student, (student_id) => student_id)
