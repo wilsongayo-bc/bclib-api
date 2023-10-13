@@ -15,9 +15,9 @@ export class BooksService {
     async createBook(createbookDto:CreateBookDto, username: string): Promise<Book> {
         createbookDto.created_by = username;
         createbookDto.updated_by = username;
-        createbookDto.name = createbookDto.name.toUpperCase();
+        createbookDto.title = createbookDto.title.toUpperCase();
 
-        const bookDB = await this.findBookByName(createbookDto.name);
+        const bookDB = await this.findBookByName(createbookDto.title);
         if(bookDB){
             throw new NotFoundException(BookErrors.Conflict);
         } 
@@ -34,12 +34,12 @@ export class BooksService {
            return await this.bookRepository.find({
             select: {
                 id: true,
-                name: true,
+                //name: true,
                 description: true,
                 status: true,
                 access_book_num: true,
-                number: true,
-                classs: true,
+                author_number: true,
+                classification: true,
                 title: true,
                 edition: true,
                 volumes: true,
@@ -90,15 +90,15 @@ export class BooksService {
         }
     
         // Update book fields
-        book.name = updateBookDto.name;
+        //book.name = updateBookDto.name;
         book.description = updateBookDto.description;
         book.status = updateBookDto.status;
         book.author = updateBookDto.author;
         book.category = updateBookDto.category;
         book.publisher = updateBookDto.publisher;
         book.access_book_num = updateBookDto.access_book_num;
-        book.number = updateBookDto.number;
-        book.classs = updateBookDto.classs;
+        book.author_number = updateBookDto.author_number;
+        book.classification = updateBookDto.classification;
         book.title = updateBookDto.title;
         book.edition = updateBookDto.edition;
         book.volumes = updateBookDto.volumes;
@@ -117,7 +117,7 @@ export class BooksService {
     async findBookByName(bookName: string) {
         return await Book.findOne({
             where: {
-                name: bookName,
+                title: bookName,
             },
         });
     }
