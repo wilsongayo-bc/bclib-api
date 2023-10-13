@@ -1,13 +1,38 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne} from "typeorm";
 import { Status } from "src/enums/status.enum";
+import { Course } from "src/typeorm";
 
 @Entity()
 export class Student extends BaseEntity {
+    toUpperCase(): Student {
+        throw new Error('Method not implemented.');
+    }
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
+    /*
+    @Column()
+    first_name: string; */
+ 
+    @Column({ unique: true })
+    student_id: string;
 
     @Column()
-    name: string;
+    first_name: string;
+
+    @Column()
+    last_name: string;
+
+    @Column()
+    full_name: string;
+
+    @ManyToOne(() => Course, (course) => course)
+    course: Course
+
+    @Column()
+    year_level: string;
+
+    @Column()
+    enrollment_date: Date;
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
