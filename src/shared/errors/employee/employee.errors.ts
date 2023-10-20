@@ -7,13 +7,13 @@ export const employeeErrors = {
 
     NotFound: {
         statusCode: 404,
-        message: 'Publisher not exists',
+        message: 'Employee not exists',
         error: "NotFound Error"
     },
 
     employeeNotFound: {
         statusCode: 404,
-        message: 'Publisher not exists',
+        message: 'Employee not exists',
         error: "NotFound Error"
     },
 }

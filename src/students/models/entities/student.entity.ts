@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne} from "typeorm";
-import { Status } from "src/enums/status.enum";
+import { Status, YearLevel } from "src/enums/status.enum";
 import { Course } from "src/typeorm";
 
 @Entity()
@@ -28,22 +28,22 @@ export class Student extends BaseEntity {
     @ManyToOne(() => Course, (course) => course)
     course: Course
 
-    @Column()
-    year_level: string;
+    @Column({ type: "enum", enum: YearLevel, default: YearLevel.FIRSTYEAR })
+    year_level: YearLevel;
 
+/*
     @Column()
     enrollment_date: Date;
-
+*/
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
-
-    @Column()
-    @CreateDateColumn()
-    created_at: Date;
-
     @Column()
     @UpdateDateColumn()
     updated_at: Date;
+
+    @Column()
+    @UpdateDateColumn()
+    created_at: Date;
 
     @Column()
     created_by: string;

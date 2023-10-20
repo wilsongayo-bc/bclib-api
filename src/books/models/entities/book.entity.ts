@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne } from "typeorm";
 import { Status } from "src/enums/status.enum";
-import { Author, Category, Publisher } from "src/typeorm";
+import { Author, Category, Publisher, Accession } from "src/typeorm";
 
 @Entity()
 export class Book extends BaseEntity {
@@ -23,12 +23,14 @@ export class Book extends BaseEntity {
     category: Category
 
     @ManyToOne(() => Publisher, (publisher) => publisher)
-    publisher: Publisher
+    publisher: Publisher 
     
-    // Accession Book No
+    @ManyToOne(() => Accession, (accession) => accession)
+    accession: Accession
+    
     @Column()
-    access_book_num: string;
-    
+    number: number;
+
     @Column()
     author_number: string;
     

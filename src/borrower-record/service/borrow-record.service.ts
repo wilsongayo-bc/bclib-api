@@ -16,14 +16,14 @@ export class BorrowRecordService {
     async createStudent(CreateBorrowRecordDto: CreateBorrowRecordDto, username: string): Promise<BorrowRecord> {
         CreateBorrowRecordDto.created_by = username;
         CreateBorrowRecordDto.updated_by = username;
-      /*  CreateBorrowRecordDto.fullname = CreateBorrowRecordDto.fullname.toUpperCase(); //name changed to fullname
+       /* CreateBorrowRecordDto.fullname = CreateBorrowRecordDto.fullname.toUpperCase(); //name changed to fullname
 
-        const studentDB = await this.findStudentByName(CreateBorrowRecordDto.fullname); //name changed to fullname
+        const BorrowRecordDB = await this.findBorrowerRecordByName(CreateBorrowRecordDto.fullname); //name changed to fullname
 
         if (studentDB) {
             throw new NotFoundException(StudentErrors.Conflict);
-        }
-        */
+        } */
+        
         const borrow_record = await this.BorrowRecordRepository.create(CreateBorrowRecordDto);
         await borrow_record.save();
 
@@ -38,8 +38,8 @@ export class BorrowRecordService {
                     id: true,
                     //name: true,
                     borrower_type: true,
-                    date_borrowed: true,
-                    date_returned: true,
+                 //   date_borrowed: true,
+                 //   date_returned: true,
                     remarks: true,
                     book_status: true,
                     return_status: true,
@@ -87,8 +87,8 @@ export class BorrowRecordService {
         BorrowRecord.student = updateBorrowRecordDto.student;
         BorrowRecord.employee = updateBorrowRecordDto.employee;
         BorrowRecord.book = updateBorrowRecordDto.book;
-        BorrowRecord.date_borrowed = updateBorrowRecordDto.date_borrowed;
-        BorrowRecord.date_returned = updateBorrowRecordDto.date_returned;
+       /* BorrowRecord.date_borrowed = updateBorrowRecordDto.date_borrowed;
+        BorrowRecord.date_returned = updateBorrowRecordDto.date_returned;*/
         BorrowRecord.remarks = updateBorrowRecordDto.remarks;
         BorrowRecord.book_status = updateBorrowRecordDto.book_status;
         BorrowRecord.return_status = updateBorrowRecordDto.return_status;
@@ -98,12 +98,12 @@ export class BorrowRecordService {
         await this.BorrowRecordRepository.save(BorrowRecord);
         return BorrowRecord;
     }
-/*
-    async findStudentByName(studentName: string) {
-        return await Student.findOne({
+
+    async findBorrowerRecordByName(BorrowersRecordName: string) {
+        return await BorrowRecord.findOne({
             where: {
-                fullname: studentName, // name changed to fullname 
+              remarks : BorrowersRecordName, 
             },
         });
-    }*/
+    }
 }

@@ -9,34 +9,33 @@ import { CourseErrors } from 'src/shared/errors/course/course.errors';
 import { Status } from 'src/enums/status.enum';
 
 @Injectable()
-export class CourseService {
+export class CoursesService {
 
     constructor(@InjectRepository(Course) private courseRepository: Repository<Course>) { }
 
-    async createCourse(createcourseDto:CreateCourseDto, username: string): Promise<Course> {
-        createcourseDto.created_by = username;
-        createcourseDto.updated_by = username;
-        createcourseDto.name = createcourseDto.name.toUpperCase();
+    async createcourse(createCourseDto:CreateCourseDto, username: string): Promise<Course> {
+        createCourseDto.created_by = username;
+        createCourseDto.updated_by = username;
+        createCourseDto.name = createCourseDto.name.toUpperCase();
         
-        const courseDB = await this.findCourseByName(createcourseDto.name);
+        const courseDB = await this.findcourseByName(createCourseDto.name);
         
         if(courseDB){
             throw new ConflictException(CommonErrors.Conflict);
         } 
 
-        const course = await this.courseRepository.create(createcourseDto);
+        const course = await this.courseRepository.create(createCourseDto);
         await course.save();
 
         return course;
     }
 
-    /* get all course */
-    async getAllCourse(): Promise<Course[]> {
+    /* get all courses */
+    async getAllcourses(): Promise<Course[]> {
         try {
            return await this.courseRepository.find({
             select: {
                 id: true,
-                code: true,
                 name: true,
                 status: true,
                 created_at: true,
@@ -63,7 +62,7 @@ export class CourseService {
     }
 
     /* find course by id */
-    async findCourseById(id:number): Promise<Course> {
+    async findcourseById(id:number): Promise<Course> {
         const course = await this.courseRepository.findOne({where: {id: id}});
         if(!course){
             throw new NotFoundException(CourseErrors.CourseNotFound);
@@ -77,9 +76,9 @@ export class CourseService {
         
     }
 
-    async updateCourse(
+    async updatecourse(
         courseId: number, 
-        updateCourseDto: UpdateCourseDto, 
+        updatecourseDto: UpdateCourseDto, 
         username: string): Promise<Course> 
     {
         const course = await this.courseRepository.findOne({where: {id: courseId}});
@@ -88,10 +87,9 @@ export class CourseService {
           throw new NotFoundException(CourseErrors.CourseNotFound);
         }
     
-        // Update  fields
-        course.code = updateCourseDto.code;
-        course.name = updateCourseDto.name;
-        course.status = updateCourseDto.status;
+        // Update course fields
+        course.name = updatecourseDto.name;
+        course.status = updatecourseDto.status;
         course.updated_by = username;
     
         // Save updated course
@@ -99,7 +97,7 @@ export class CourseService {
         return course;
       }
 
-    async findCourseByName(courseName: string) {
+    async findcourseByName(courseName: string) {
         return await Course.findOne({
             where: [
                 { name: courseName }

@@ -18,3 +18,11 @@ export enum ReturnStatus{
     DAMAGED = 'Damaged',
     LOST = 'Lost'
 }
+
+export enum YearLevel{
+    FIRSTYEAR = 'First Year',
+    SECONDYEAR = 'Second Year',
+    THIRDYEAR = 'Third year',
+    FOURTHYEAR = 'Fourth Year',
+    FIFHYEAR = 'Fifh year',
+}

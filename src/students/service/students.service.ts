@@ -16,6 +16,9 @@ export class StudentsService {
         createstudentDto.created_by = username;
         createstudentDto.updated_by = username;
         createstudentDto.full_name = createstudentDto.full_name.toUpperCase(); //name changed to full_name
+        
+
+         createstudentDto.full_name =  createstudentDto.first_name + ' ' +  createstudentDto.last_name; // combine last name and first name
 
         const studentDB = await this.findStudentByName(createstudentDto.full_name); //name changed to full_name
 
@@ -42,7 +45,7 @@ export class StudentsService {
                     last_name: true,
                     full_name: true,
                     year_level: true,
-                    enrollment_date: true,
+                  //  enrollment_date: true,
                     status: true,
                     created_at: true,
                     updated_at: true,
@@ -89,7 +92,6 @@ export class StudentsService {
         student.last_name = updateStudentDto.last_name;
         student.full_name = updateStudentDto.full_name; 
         student.year_level = updateStudentDto.year_level;
-        student.enrollment_date = updateStudentDto.Enrollment_date;
         student.status = updateStudentDto.status;
         student.course = updateStudentDto.course;
         student.updated_by = username;

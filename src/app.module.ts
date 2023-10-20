@@ -14,6 +14,7 @@ import { PublishersModule } from './publisher/publishers.module';
 import { CourseModule } from './course/course.module';
 import { BorrowRecordModule } from './borrower-record/borrow-record.module';
 import { employeeModule } from './employee/employee.module';
+import { AccessionModule } from './accession/accession.module';
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { employeeModule } from './employee/employee.module';
     PublishersModule,
     CourseModule,
     employeeModule,
-    BorrowRecordModule
+    BorrowRecordModule,
+    AccessionModule
   ],
   controllers: [],
   providers: [],
