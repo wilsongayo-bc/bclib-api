@@ -6,6 +6,7 @@ import { CreateStudentDto } from '../models/dto/create-student.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { StudentErrors } from 'src/shared/errors/student/student.errors';
 import { UpdateStudentDto } from '../models/dto/update-student.dto';
+import { Status } from 'src/enums/status.enum';
 
 @Injectable()
 export class StudentsService {
@@ -53,6 +54,18 @@ export class StudentsService {
                     updated_by: true
                 },
             relations: ['course'],
+            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+    async getAllEnabled(): Promise<Student[]> {
+        try {
+            return await this.studentRepository.find({
+                where: {
+                    status: Status.ENABLED,
+                },
             });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
