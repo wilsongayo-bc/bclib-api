@@ -23,7 +23,7 @@ export class employeeService {
         if (employeeDB) {
             throw new NotFoundException(employeeErrors.Conflict);
         }
-        createEmployeeDto.full_name = createEmployeeDto.first_name + ' ' + createEmployeeDto.last_name;
+        createEmployeeDto.full_name = createEmployeeDto.first_name + ' ' + createEmployeeDto.last_name; // combine last name and first name
         const employee = await this.employeeRepository.create(createEmployeeDto);
         await employee.save();
 

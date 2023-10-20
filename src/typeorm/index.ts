@@ -1,3 +1,4 @@
+import { Accession } from "src/accession/models/entities/accession.entity";
 import { Author } from "src/author/models/entities/author.entity";
 import { Book } from "src/books/models/entities/book.entity";
 import { BorrowRecord } from "src/borrower-record/models/entities/borrow-record.entity";
@@ -8,6 +9,7 @@ import { Publisher } from "src/publisher/models/entities/publisher.entity";
 import { Student } from "src/students/models/entities/student.entity";
 import { User } from "src/users/models/entities/user.entity";
 
+
 const entities = [
   User,
   Book,
@@ -17,7 +19,8 @@ const entities = [
   Publisher,
   Course,
   Employee,
-  BorrowRecord
+  BorrowRecord,
+  Accession
 ];
 
 export {
@@ -29,7 +32,8 @@ export {
   Publisher,
   Course,
   Employee,
-  BorrowRecord
+  BorrowRecord,
+  Accession
 };
 
 export default entities;

@@ -7,24 +7,24 @@ export class BorrowRecord extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column({ type: "enum", enum: borrower_type, default: borrower_type.EMPLOYEE })
+    @Column({ type: "enum", enum: borrower_type, default: borrower_type.STUDENT })
     borrower_type: borrower_type;
 
-    @ManyToOne(() => Student, (student_id) => student_id)
+    @ManyToOne(() => Student, (student) => student)
     student: Student
 
-    @ManyToOne(() => Employee, (employee_id) => employee_id)
+    @ManyToOne(() => Employee, (employee) => employee)
     employee: Employee
 
-    @ManyToOne(() => Book, (book_id) => book_id)
+    @ManyToOne(() => Book, (book) => book)
     book: Book
-
+/*
     @Column()
     date_borrowed: Date;
 
     @Column()
     date_returned: Date;
-
+*/
     @Column()
     remarks:string;
 

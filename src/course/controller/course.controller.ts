@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Param, Put, UseGuards } from '@nestjs/common';
-import { CourseService } from '../service/course.service';
+import { CoursesService } from '../service/course.service';
 import { CreateCourseDto } from '../models/dto/create-course.dto';
 import { Course } from '../models/entities/course.entity';
 import { UpdateCourseDto } from '../models/dto/update-course.dto';
@@ -11,29 +11,29 @@ import { RequestGetUser } from 'src/users/decorator/user.decorator';
 @UseGuards(JwtAuthGuard)
 export class CourseController {
 
-  constructor(private readonly CourseService: CourseService) { }
+  constructor(private readonly CoursesService: CoursesService) { }
 
   @Post()
   createCourse(
     @RequestGetUser() user: User,
     @Body() createCourseDto:CreateCourseDto): Promise<Course> 
   {
-    return this.CourseService.createCourse(createCourseDto, user.username);
+    return this.CoursesService.createcourse(createCourseDto, user.username);
   }
 
   @Get()
   async getAllCourse(): Promise<Course[]> {
-      return this.CourseService.getAllCourse();
+      return this.CoursesService.getAllcourses();
   }
 
   @Get('/enabled')
   async getAllEnabled(): Promise<Course[]> {
-      return this.CourseService.getAllEnabled();
+      return this.CoursesService.getAllEnabled();
   }
 
   @Get('/:id')
   async getCourseById(@Param('id') id: number): Promise<Course>{
-      return await this.CourseService.findCourseById(id);
+      return await this.CoursesService.findcourseById(id);
   }
 
   @Put(':id')
@@ -42,7 +42,7 @@ export class CourseController {
     @Body() UpdateCourseDto: UpdateCourseDto,
     @RequestGetUser() user: User,
   ): Promise<Course> {
-    const updatedCourse = await this.CourseService.updateCourse(courseId, UpdateCourseDto, user.username);
+    const updatedCourse = await this.CoursesService.updatecourse(courseId, UpdateCourseDto, user.username);
     return updatedCourse;
   }
 }

@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
-import { Status } from 'src/enums/status.enum';
+import { Status, YearLevel } from 'src/enums/status.enum';
 import { Course } from 'src/typeorm';
 
 export class CreateStudentDto {
@@ -15,17 +15,16 @@ export class CreateStudentDto {
     @IsNotEmpty()
     last_name: string;
 
-    @IsNotEmpty()
+   
     full_name: string;
 
     @IsNotEmptyObject({ nullable: false })
     course: Course
 
-    @IsNotEmpty()
-    year_level: string;
+    @IsEnum(YearLevel)
+    year_level: YearLevel;
 
-    @IsNotEmpty()
-    Enrollment_date: Date;
+   //enrollment_date: Date;
 
     @IsEnum(Status)
     status: Status;

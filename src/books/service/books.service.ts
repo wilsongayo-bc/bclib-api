@@ -16,7 +16,7 @@ export class BooksService {
         createbookDto.created_by = username;
         createbookDto.updated_by = username;
         createbookDto.title = createbookDto.title.toUpperCase();
-
+        console.log(createbookDto);// edentify the error
         const bookDB = await this.findBookByName(createbookDto.title);
         if(bookDB){
             throw new NotFoundException(BookErrors.Conflict);
@@ -37,7 +37,6 @@ export class BooksService {
                 //name: true,
                 description: true,
                 status: true,
-                access_book_num: true,
                 author_number: true,
                 classification: true,
                 title: true,
@@ -46,6 +45,7 @@ export class BooksService {
                 pages: true,
                 source_of_fund: true,
                 cost_price: true,
+                number: true,
                 year: true,
                 remarks: true,  
                 created_at: true,
@@ -53,7 +53,7 @@ export class BooksService {
                 created_by: true,
                 updated_by: true
             },
-            relations:['author', 'category', 'publisher'],
+            relations:['author', 'category', 'publisher', 'accession'],
            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -64,7 +64,7 @@ export class BooksService {
     async findBookById(id:number): Promise<Book> {
         const book = await this.bookRepository.findOne({
             where: {id: id},
-            relations:['author', 'category', 'publisher']
+            relations:['author', 'category', 'publisher', 'accession']
         });
         if(!book){
             throw new NotFoundException(BookErrors.BookNotFound);
@@ -96,7 +96,8 @@ export class BooksService {
         book.author = updateBookDto.author;
         book.category = updateBookDto.category;
         book.publisher = updateBookDto.publisher;
-        book.access_book_num = updateBookDto.access_book_num;
+        book.accession= updateBookDto.accession;
+        book.number= updateBookDto.number;
         book.author_number = updateBookDto.author_number;
         book.classification = updateBookDto.classification;
         book.title = updateBookDto.title;

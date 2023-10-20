@@ -1,19 +1,19 @@
-export const BookErrors = {
+export const AccessionErrors = {
     Conflict: {
         statusCode: 409,
-        message: 'Name already exists',
+        message: 'Accession book number already exists',
         error: "Conflict Error"
     },
 
     NotFound: {
         statusCode: 404,
-        message: 'Borrow record  not exists',
+        message: 'Accession not exists',
         error: "NotFound Error"
     },
 
-    BookNotFound: {
+    AccessionNotFound: {
         statusCode: 404,
-        message: 'Borrow record not exists',
+        message: 'Accession not exists',
         error: "NotFound Error"
     },
 }
