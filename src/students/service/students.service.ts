@@ -6,6 +6,7 @@ import { CreateStudentDto } from '../models/dto/create-student.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { StudentErrors } from 'src/shared/errors/student/student.errors';
 import { UpdateStudentDto } from '../models/dto/update-student.dto';
+import { Status } from 'src/enums/status.enum';
 
 @Injectable()
 export class StudentsService {
@@ -45,7 +46,7 @@ export class StudentsService {
                     last_name: true,
                     full_name: true,
                     year_level: true,
-                  //  enrollment_date: true,
+                    enrollment_date: true,
                     status: true,
                     created_at: true,
                     updated_at: true,
@@ -53,6 +54,18 @@ export class StudentsService {
                     updated_by: true
                 },
             relations: ['course'],
+            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+    async getAllEnabled(): Promise<Student[]> {
+        try {
+            return await this.studentRepository.find({
+                where: {
+                    status: Status.ENABLED,
+                },
             });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -92,6 +105,7 @@ export class StudentsService {
         student.last_name = updateStudentDto.last_name;
         student.full_name = updateStudentDto.full_name; 
         student.year_level = updateStudentDto.year_level;
+        student.enrollment_date = updateStudentDto.enrollment_date;
         student.status = updateStudentDto.status;
         student.course = updateStudentDto.course;
         student.updated_by = username;

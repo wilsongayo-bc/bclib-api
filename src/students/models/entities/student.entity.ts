@@ -31,10 +31,9 @@ export class Student extends BaseEntity {
     @Column({ type: "enum", enum: YearLevel, default: YearLevel.FIRSTYEAR })
     year_level: YearLevel;
 
-/*
-    @Column()
+    @Column() 
     enrollment_date: Date;
-*/
+
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
     @Column()

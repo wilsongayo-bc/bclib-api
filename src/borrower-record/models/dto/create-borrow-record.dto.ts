@@ -3,10 +3,10 @@ import { BookStatus, ReturnStatus, Status, borrower_type } from 'src/enums/statu
 import { Book, Course, Employee, Student } from 'src/typeorm';
 
 export class CreateBorrowRecordDto {
-    
+
     @IsEnum(borrower_type)
     borrower_type: borrower_type;
-    
+
     @IsNotEmptyObject({ nullable: false })
     student: Student
 
@@ -15,22 +15,16 @@ export class CreateBorrowRecordDto {
 
     @IsNotEmptyObject({ nullable: false })
     book: Book
-    /*
-    @IsNotEmpty()
-    date_borrowed: Date;
 
-    @IsNotEmpty()
+
+    @IsNotEmptyObject({ nullable: false })
     date_returned: Date;
 
-*/
-   
+
     remarks: string;
-/*
-    @IsNotEmpty()
-    Enrollment_date: Date;
-  */
+
     @IsEnum(BookStatus)
-    book_status: BookStatus;
+    books_status: BookStatus;
 
     @IsEnum(ReturnStatus)
     return_status: ReturnStatus;

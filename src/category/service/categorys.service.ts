@@ -91,6 +91,7 @@ export class CategorysService {
     
         // Update category fields
         category.name = updateCategoryDto.name;
+        category.code = updateCategoryDto.code;
         category.status = updateCategoryDto.status;
         category.updated_by = username;
     

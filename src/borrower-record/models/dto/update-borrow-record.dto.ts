@@ -15,21 +15,15 @@ export class UpdateBorrowRecordDto {
 
     @IsNotEmptyObject({ nullable: false })
     book: Book
-/*
-    @IsNotEmpty()
-    date_borrowed: Date;
-
-    @IsNotEmpty()
+    
+    @IsNotEmptyObject({ nullable: false })
     date_returned: Date;
-*/
+
    
     remarks: string;
-/*
-    @IsNotEmpty()
-    Enrollment_date: Date;
-*/
+
     @IsEnum(BookStatus)
-    book_status: BookStatus;
+    books_status: BookStatus;
 
     @IsEnum(ReturnStatus)
     return_status: ReturnStatus;

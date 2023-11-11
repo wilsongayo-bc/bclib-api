@@ -38,10 +38,10 @@ export class BorrowRecordService {
                     id: true,
                     //name: true,
                     borrower_type: true,
-                 //   date_borrowed: true,
-                 //   date_returned: true,
+                    date_borrowed: true,
+                    date_returned: true,
                     remarks: true,
-                    book_status: true,
+                    books_status: true,
                     return_status: true,
                     created_at: true,
                     updated_at: true,
@@ -55,7 +55,7 @@ export class BorrowRecordService {
         }
     }
 
-    /* find student by id */
+    /*s find student by id */
     async findStudentById(id: number): Promise<BorrowRecord> {
         const BorrowRecord = await this.BorrowRecordRepository.findOne({ where: { id: id },
             relations:['student', 'employee', 'book']
@@ -87,10 +87,10 @@ export class BorrowRecordService {
         BorrowRecord.student = updateBorrowRecordDto.student;
         BorrowRecord.employee = updateBorrowRecordDto.employee;
         BorrowRecord.book = updateBorrowRecordDto.book;
-       /* BorrowRecord.date_borrowed = updateBorrowRecordDto.date_borrowed;
-        BorrowRecord.date_returned = updateBorrowRecordDto.date_returned;*/
+      //  BorrowRecord.date_borrowed = updateBorrowRecordDto.date_borrowed;
+        BorrowRecord.date_returned = updateBorrowRecordDto.date_returned;
         BorrowRecord.remarks = updateBorrowRecordDto.remarks;
-        BorrowRecord.book_status = updateBorrowRecordDto.book_status;
+        BorrowRecord.books_status = updateBorrowRecordDto.books_status;
         BorrowRecord.return_status = updateBorrowRecordDto.return_status;
         BorrowRecord.updated_by = username;
 

@@ -37,6 +37,7 @@ export class CoursesService {
             select: {
                 id: true,
                 name: true,
+                code: true,
                 status: true,
                 created_at: true,
                 updated_at: true,
@@ -75,6 +76,7 @@ export class CoursesService {
         }
         
     }
+    
 
     async updatecourse(
         courseId: number, 
@@ -88,6 +90,7 @@ export class CoursesService {
         }
     
         // Update course fields
+        course.code = updatecourseDto.code;
         course.name = updatecourseDto.name;
         course.status = updatecourseDto.status;
         course.updated_by = username;

@@ -1,13 +1,13 @@
 import { IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
-import { Status } from 'src/enums/status.enum';
+import { BookStatus, BooksStatus, Status } from 'src/enums/status.enum';
 import { Accession, Author, Category, Publisher } from 'src/typeorm';
 
 export class CreateBookDto {
   /*  @IsNotEmpty()
     name: string; */
 
-    @IsEnum(Status)
-    status: Status;
+    @IsEnum(BooksStatus)
+    book_status: BooksStatus;
 
     description: string;
 

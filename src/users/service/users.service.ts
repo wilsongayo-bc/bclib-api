@@ -9,6 +9,9 @@ import { UpdateUserDto } from '../models/dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
+    getAllEnabled(): User[] | PromiseLike<User[]> {
+      throw new Error('Method not implemented.');
+    }
 
     constructor(@InjectRepository(User) private userRepository: Repository<User>) { }
 
@@ -31,14 +34,15 @@ export class UsersService {
                     last_name: true,
                     username: true,
                     email: true,
-                    role: true,
+                   // role: true,
                     status: true,
                     created_at: true,
                     updated_at: true,
                     created_by: true,
                     updated_by: true
                 },
-                where: { id: Not(1) }
+                where: { id: Not(1) },
+                relations:['role'],
             });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
@@ -47,7 +51,9 @@ export class UsersService {
 
     /* find user by id */
     async findUserById(id: number): Promise<User> {
-        const user = await this.userRepository.findOne({ where: { id: id } });
+        const user = await this.userRepository.findOne({ where: { id: id },
+            relations:['role'], });
+        
         if (!user) {
             throw new NotFoundException(UserErrors.UserNotFound);
         }
@@ -91,6 +97,7 @@ export class UsersService {
         return await User.findOne({
             where: {
                 email: email,
+                
             },
         });
     }

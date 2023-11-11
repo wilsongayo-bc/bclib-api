@@ -6,6 +6,7 @@ import { CreateEmployeeDto } from '../models/dto/create-employee.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { UpdateEmployeeDto } from '../models/dto/update-employee.dto';
 import { employeeErrors } from 'src/shared/errors/employee/employee.errors';
+import { Status } from 'src/enums/status.enum';
 
 
 @Injectable()
@@ -48,6 +49,19 @@ export class employeeService {
                     updated_by: true
                 },
             relations: ['course'],
+            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+
+    async getAllEnabled(): Promise<Employee[]> {
+        try {
+            return await this.employeeRepository.find({
+                where: {
+                    status: Status.ENABLED,
+                },
             });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);

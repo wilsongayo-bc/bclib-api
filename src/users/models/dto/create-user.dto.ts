@@ -1,6 +1,7 @@
-import { IsEmail, IsEnum, IsNotEmpty } from 'class-validator';
-import { UserRole } from 'src/enums/role.enum';
+import { IsEmail, IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
+import { UsersRole } from 'src/enums/role.enum';
 import { Status } from 'src/enums/status.enum';
+//import { Role } from 'src/typeorm';
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -17,9 +18,12 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     password: string;
+    /*
+    @IsEnum(UsersRole)
+    role: UsersRole; 
 
-    @IsEnum(UserRole)
-    role: UserRole;
+    @IsNotEmptyObject({ nullable: false })
+    role: Role*/
 
     @IsEnum(Status)
     status: Status;

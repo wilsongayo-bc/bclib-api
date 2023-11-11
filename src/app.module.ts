@@ -15,6 +15,7 @@ import { CourseModule } from './course/course.module';
 import { BorrowRecordModule } from './borrower-record/borrow-record.module';
 import { employeeModule } from './employee/employee.module';
 import { AccessionModule } from './accession/accession.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { AccessionModule } from './accession/accession.module';
     CourseModule,
     employeeModule,
     BorrowRecordModule,
-    AccessionModule
+    AccessionModule,
+    RoleModule
   ],
   controllers: [],
   providers: [],

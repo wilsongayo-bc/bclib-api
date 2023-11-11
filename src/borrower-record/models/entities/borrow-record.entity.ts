@@ -18,18 +18,19 @@ export class BorrowRecord extends BaseEntity {
 
     @ManyToOne(() => Book, (book) => book)
     book: Book
-/*
-    @Column()
-    date_borrowed: Date;
 
     @Column()
+    @CreateDateColumn()
+    date_borrowed: Date;
+
+    @Column() 
     date_returned: Date;
-*/
+
     @Column()
     remarks:string;
 
     @Column({ type: "enum", enum: BookStatus, default: BookStatus.CHECKEDOUT})
-    book_status: BookStatus;
+    books_status: BookStatus;
     
     @Column({ type: "enum", enum: ReturnStatus, default: ReturnStatus.GOOD})
     return_status: ReturnStatus;

@@ -24,7 +24,7 @@ export class CreateStudentDto {
     @IsEnum(YearLevel)
     year_level: YearLevel;
 
-   //enrollment_date: Date;
+    enrollment_date: Date;
 
     @IsEnum(Status)
     status: Status;
