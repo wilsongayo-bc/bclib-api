@@ -6,6 +6,7 @@ import { Category } from "src/category/models/entities/category.entity";
 import { Course } from "src/course/models/entities/course.entity";
 import { Employee } from "src/employee/models/entities/employee.entity";
 import { Publisher } from "src/publisher/models/entities/publisher.entity";
+import { Role } from "src/role/models/entities/role.entity";
 import { Student } from "src/students/models/entities/student.entity";
 import { User } from "src/users/models/entities/user.entity";
 
@@ -20,7 +21,9 @@ const entities = [
   Course,
   Employee,
   BorrowRecord,
-  Accession
+  Accession,
+  Role
+  
 ];
 
 export {
@@ -33,7 +36,9 @@ export {
   Course,
   Employee,
   BorrowRecord,
-  Accession
+  Accession,
+  Role
+  
 };
 
 export default entities;

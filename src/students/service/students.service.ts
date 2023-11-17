@@ -46,7 +46,7 @@ export class StudentsService {
                     last_name: true,
                     full_name: true,
                     year_level: true,
-                  //  enrollment_date: true,
+                    enrollment_date: true,
                     status: true,
                     created_at: true,
                     updated_at: true,
@@ -105,6 +105,7 @@ export class StudentsService {
         student.last_name = updateStudentDto.last_name;
         student.full_name = updateStudentDto.full_name; 
         student.year_level = updateStudentDto.year_level;
+        student.enrollment_date = updateStudentDto.enrollment_date;
         student.status = updateStudentDto.status;
         student.course = updateStudentDto.course;
         student.updated_by = username;

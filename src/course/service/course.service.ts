@@ -76,6 +76,7 @@ export class CoursesService {
         }
         
     }
+    
 
     async updatecourse(
         courseId: number, 
@@ -89,6 +90,7 @@ export class CoursesService {
         }
     
         // Update course fields
+        course.code = updatecourseDto.code;
         course.name = updatecourseDto.name;
         course.code = updatecourseDto.code;
         course.status = updatecourseDto.status;

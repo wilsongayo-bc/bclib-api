@@ -26,6 +26,11 @@ export class employeeController {
       return this.employeeService.getAllemployee();
   }
 
+  @Get('/enabled')
+  async getAllEnabled(): Promise<Employee[]> {
+      return this.employeeService.getAllEnabled();
+  }
+
   @Get('/:id')
   async getemployeeById(@Param('id') id: number): Promise<Employee>{
       return await this.employeeService.findemployeeById(id);

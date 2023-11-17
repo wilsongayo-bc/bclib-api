@@ -1,18 +1,14 @@
 import { IsEnum, IsNotEmpty } from 'class-validator';
 import { Status } from 'src/enums/status.enum';
 
-export class CreateCourseDto {
+export class UpdateRoleDto {
     @IsNotEmpty()
-    code: string;
+    role: string;
 
-    @IsNotEmpty()
-    name: string;
+    description: string;
 
     @IsEnum(Status)
     status: Status;
-    
-    description: string;
-    created_by: string;
 
     updated_by: string;
 }

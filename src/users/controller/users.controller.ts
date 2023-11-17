@@ -25,6 +25,11 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
+  @Get('/enabled')
+  async getAllEnabled(): Promise<User[]> {
+      return this.usersService.getAllEnabled();
+  }
+
   @Get('/:id')
   async getUserById(@Param('id') id: number): Promise<User> {
     return await this.usersService.findUserById(id);
