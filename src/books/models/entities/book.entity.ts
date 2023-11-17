@@ -1,20 +1,20 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne } from "typeorm";
-import { Status } from "src/enums/status.enum";
-import { Author, Category, Publisher } from "src/typeorm";
+import { BookStatus, BooksStatus, Status } from "src/enums/status.enum";
+import { Author, Category, Publisher, Accession } from "src/typeorm";
 
 @Entity()
 export class Book extends BaseEntity {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number;
 
-    @Column()
-    name: string;
+   /* @Column()
+    name: string; */ 
 
     @Column()
     description: string;
 
-    @Column({ type: "enum", enum: Status, default: Status.ENABLED })
-    status: Status;
+    @Column({ type: "enum", enum: BooksStatus, default: BooksStatus.AVAILABLE })
+    book_status: BooksStatus;
 
     @ManyToOne(() => Author, (author) => author)
     author: Author
@@ -23,17 +23,19 @@ export class Book extends BaseEntity {
     category: Category
 
     @ManyToOne(() => Publisher, (publisher) => publisher)
-    publisher: Publisher
+    publisher: Publisher 
     
-    // Accession Book No
-    @Column()
-    access_book_num: string;
+    @ManyToOne(() => Accession, (accession) => accession)
+    accession: Accession
     
     @Column()
     number: number;
+
+    @Column()
+    author_number: string;
     
     @Column()
-    classs: string; 
+    classification: string; 
     
     @Column()
     title: string;

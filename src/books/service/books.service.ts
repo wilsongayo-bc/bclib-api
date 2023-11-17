@@ -6,6 +6,7 @@ import { CreateBookDto } from '../models/dto/create-book.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { BookErrors } from 'src/shared/errors/book/book.errors';
 import { UpdateBookDto } from '../models/dto/update-book.dto';
+import { BooksStatus, Status } from 'src/enums/status.enum';
 
 @Injectable()
 export class BooksService {
@@ -15,12 +16,12 @@ export class BooksService {
     async createBook(createbookDto:CreateBookDto, username: string): Promise<Book> {
         createbookDto.created_by = username;
         createbookDto.updated_by = username;
-        createbookDto.name = createbookDto.name.toUpperCase();
-
-        const bookDB = await this.findBookByName(createbookDto.name);
+        createbookDto.title = createbookDto.title.toUpperCase();
+        console.log(createbookDto);// edentify the error
+       /* const bookDB = await this.findBookByTitle(createbookDto.title);
         if(bookDB){
             throw new NotFoundException(BookErrors.Conflict);
-        } 
+        } */
 
         const book = await this.bookRepository.create(createbookDto);
         await book.save();
@@ -34,18 +35,18 @@ export class BooksService {
            return await this.bookRepository.find({
             select: {
                 id: true,
-                name: true,
+                //name: true,
                 description: true,
-                status: true,
-                access_book_num: true,
-                number: true,
-                classs: true,
+                book_status: true,
+                author_number: true,
+                classification: true,
                 title: true,
                 edition: true,
                 volumes: true,
                 pages: true,
                 source_of_fund: true,
                 cost_price: true,
+                number: true,
                 year: true,
                 remarks: true,  
                 created_at: true,
@@ -53,8 +54,21 @@ export class BooksService {
                 created_by: true,
                 updated_by: true
             },
-            relations:['author', 'category', 'publisher'],
+            relations:['author', 'category', 'publisher', 'accession'],
            });
+        } catch (err) {
+            throw new InternalServerErrorException(CommonErrors.ServerError);
+        }
+    }
+
+    
+    async getAllEnabled(): Promise<Book[]> {
+        try {
+            return await this.bookRepository.find({
+                where: {
+                    book_status: BooksStatus.AVAILABLE,
+                },
+            });
         } catch (err) {
             throw new InternalServerErrorException(CommonErrors.ServerError);
         }
@@ -64,7 +78,7 @@ export class BooksService {
     async findBookById(id:number): Promise<Book> {
         const book = await this.bookRepository.findOne({
             where: {id: id},
-            relations:['author', 'category', 'publisher']
+            relations:['author', 'category', 'publisher', 'accession']
         });
         if(!book){
             throw new NotFoundException(BookErrors.BookNotFound);
@@ -90,15 +104,16 @@ export class BooksService {
         }
     
         // Update book fields
-        book.name = updateBookDto.name;
+        //book.name = updateBookDto.name;
         book.description = updateBookDto.description;
-        book.status = updateBookDto.status;
+        book.book_status = updateBookDto.book_status;
         book.author = updateBookDto.author;
         book.category = updateBookDto.category;
         book.publisher = updateBookDto.publisher;
-        book.access_book_num = updateBookDto.access_book_num;
-        book.number = updateBookDto.number;
-        book.classs = updateBookDto.classs;
+        book.accession= updateBookDto.accession;
+        book.number= updateBookDto.number;
+        book.author_number = updateBookDto.author_number;
+        book.classification = updateBookDto.classification;
         book.title = updateBookDto.title;
         book.edition = updateBookDto.edition;
         book.volumes = updateBookDto.volumes;
@@ -114,10 +129,10 @@ export class BooksService {
         return book;
       }
 
-    async findBookByName(bookName: string) {
+    async findBookByTitle(bookTitle: string) {
         return await Book.findOne({
             where: {
-                name: bookName,
+            title: bookTitle,
             },
         });
     }

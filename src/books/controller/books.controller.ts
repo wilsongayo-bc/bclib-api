@@ -25,6 +25,10 @@ export class BooksController {
   async getAllBooks(): Promise<Book[]> {
       return this.booksService.getAllBooks();
   }
+  @Get('/enabled')
+  async getAllEnabled(): Promise<Book[]> {
+      return this.booksService.getAllEnabled();
+  }
 
   @Get('/:id')
   async getBookById(@Param('id') id: number): Promise<Book>{

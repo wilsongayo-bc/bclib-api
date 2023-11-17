@@ -1,13 +1,13 @@
 import { IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
-import { Status } from 'src/enums/status.enum';
-import { Author, Category, Publisher } from 'src/typeorm';
+import { BookStatus, BooksStatus, Status } from 'src/enums/status.enum';
+import { Accession, Author, Category, Publisher } from 'src/typeorm';
 
 export class UpdateBookDto {
-    @IsNotEmpty()
-    name: string;
+   /* @IsNotEmpty()
+    name: string; */
 
-    @IsEnum(Status)
-    status: Status;
+    @IsEnum(BooksStatus)
+    book_status: BooksStatus;
 
     @IsNotEmptyObject({ nullable: false })
     author: Author
@@ -16,16 +16,17 @@ export class UpdateBookDto {
     category: Category
 
     @IsNotEmptyObject({ nullable: false })
-    publisher: Publisher
+    publisher: Publisher 
 
-    description: string;
+    @IsNotEmptyObject({ nullable: false })
+    accession: Accession
 
-    access_book_num: string;
-    
     number: number;
-    
-    classs: string;
-    
+
+    author_number: string;
+
+    classification: string;
+     
     title: string;
 
     edition: string;
@@ -40,7 +41,9 @@ export class UpdateBookDto {
 
     year: string;
 
-    remarks: string;
+    remarks: string; 
+
+    description: string;
 
     created_by: string;
 

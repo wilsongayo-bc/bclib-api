@@ -1,7 +1,8 @@
-import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate } from "typeorm";
+import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToOne } from "typeorm";
 import * as bcrypt from 'bcryptjs';
-import { UserRole } from "src/enums/role.enum";
+import { UsersRole } from "src/enums/role.enum";
 import { Status } from "src/enums/status.enum";
+import { Role } from "src/role/models/entities/role.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -22,9 +23,11 @@ export class User extends BaseEntity {
 
     @Column()
     password: string;
-
-    @Column({ type: "enum", enum: UserRole, default: UserRole.USER })
-    role: UserRole;
+    /*
+    @Column({ type: "enum", enum: UsersRole, default: UsersRole.USER })
+    role: UsersRole; */
+    @ManyToOne(() => Role, (role) => role)
+    role: Role
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;

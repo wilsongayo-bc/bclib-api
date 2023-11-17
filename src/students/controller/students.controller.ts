@@ -25,6 +25,15 @@ export class StudentsController {
   async getAllStudents(): Promise<Student[]> {
       return this.studentsService.getAllStudents();
   }
+  @Get('/enabled')
+  async getAllEnabled(): Promise<Student[]> {
+      return this.studentsService.getAllEnabled();
+  }
+
+  @Get('/enabled')
+  async getAllStudentsEnabled(): Promise<Student[]> {
+      return this.studentsService.getAllEnabled();
+  }
 
   @Get('/:id')
   async getStudentById(@Param('id') id: number): Promise<Student>{

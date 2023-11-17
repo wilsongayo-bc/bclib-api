@@ -11,6 +11,11 @@ import { StudentsModule } from './students/students.module';
 import { CategorysModule } from './category/categorys.module';
 import { AuthorsModule } from './author/authors.module';
 import { PublishersModule } from './publisher/publishers.module';
+import { CourseModule } from './course/course.module';
+import { BorrowRecordModule } from './borrower-record/borrow-record.module';
+import { employeeModule } from './employee/employee.module';
+import { AccessionModule } from './accession/accession.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -34,7 +39,12 @@ import { PublishersModule } from './publisher/publishers.module';
     StudentsModule,
     CategorysModule,
     AuthorsModule,
-    PublishersModule
+    PublishersModule,
+    CourseModule,
+    employeeModule,
+    BorrowRecordModule,
+    AccessionModule,
+    RoleModule
   ],
   controllers: [],
   providers: [],
