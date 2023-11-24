@@ -3,7 +3,7 @@ import { Status } from 'src/enums/status.enum';
 
 export class UpdateAuthorDto {
     @IsNotEmpty()
-    name: string;
+    full_name: string;
 
     @IsEnum(Status)
     status: Status;

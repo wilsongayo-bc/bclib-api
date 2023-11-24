@@ -16,9 +16,9 @@ export class CoursesService {
     async createcourse(createCourseDto:CreateCourseDto, username: string): Promise<Course> {
         createCourseDto.created_by = username;
         createCourseDto.updated_by = username;
-        createCourseDto.name = createCourseDto.name.toUpperCase();
+        createCourseDto.course_name = createCourseDto.course_name.toUpperCase();
         
-        const courseDB = await this.findcourseByName(createCourseDto.name);
+        const courseDB = await this.findcourseByName(createCourseDto.course_name);
         
         if(courseDB){
             throw new ConflictException(CommonErrors.Conflict);
@@ -36,7 +36,7 @@ export class CoursesService {
            return await this.courseRepository.find({
             select: {
                 id: true,
-                name: true,
+                course_name: true,
                 code: true,
                 status: true,
                 created_at: true,
@@ -91,7 +91,7 @@ export class CoursesService {
     
         // Update course fields
         course.code = updatecourseDto.code;
-        course.name = updatecourseDto.name;
+        course.course_name = updatecourseDto.course_name;
         course.status = updatecourseDto.status;
         course.updated_by = username;
     
@@ -103,7 +103,7 @@ export class CoursesService {
     async findcourseByName(courseName: string) {
         return await Course.findOne({
             where: [
-                { name: courseName }
+                { course_name: courseName }
             ],
         });
     }

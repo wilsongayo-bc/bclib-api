@@ -7,7 +7,7 @@ export class Author extends BaseEntity {
     id: number;
 
     @Column({ unique: true })
-    name: string;
+    full_name: string;
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;
