@@ -16,9 +16,9 @@ export class AuthorsService {
     async createAuthor(createauthorDto:CreateAuthorDto, username: string): Promise<Author> {
         createauthorDto.created_by = username;
         createauthorDto.updated_by = username;
-        createauthorDto.name = createauthorDto.name.toUpperCase();
+        createauthorDto.full_name = createauthorDto.full_name.toUpperCase();
         
-        const authorDB = await this.findAuthorByName(createauthorDto.name);
+        const authorDB = await this.findAuthorByName(createauthorDto.full_name);
         
         if(authorDB){
             throw new ConflictException(CommonErrors.Conflict);
@@ -36,7 +36,7 @@ export class AuthorsService {
            return await this.authorRepository.find({
             select: {
                 id: true,
-                name: true,
+                full_name: true,
                 status: true,
                 created_at: true,
                 updated_at: true,
@@ -88,7 +88,7 @@ export class AuthorsService {
         }
     
         // Update author fields
-        author.name = updateAuthorDto.name;
+        author.full_name = updateAuthorDto.full_name;
         author.status = updateAuthorDto.status;
         author.updated_by = username;
     
@@ -100,7 +100,7 @@ export class AuthorsService {
     async findAuthorByName(authorName: string) {
         return await Author.findOne({
             where: [
-                { name: authorName }
+                { full_name: authorName }
             ],
         });
     }
