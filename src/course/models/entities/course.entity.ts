@@ -10,7 +10,7 @@ export class Course extends BaseEntity {
     code: string;
     
     @Column({ unique: true })
-    name: string;
+    course_name: string;
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;

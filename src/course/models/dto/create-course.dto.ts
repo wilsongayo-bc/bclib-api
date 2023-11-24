@@ -6,7 +6,7 @@ export class CreateCourseDto {
     code: string;
 
     @IsNotEmpty()
-    name: string;
+    course_name: string;
 
     @IsEnum(Status)
     status: Status;
