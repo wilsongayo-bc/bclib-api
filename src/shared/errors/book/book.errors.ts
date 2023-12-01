@@ -16,4 +16,10 @@ export const BookErrors = {
         message: 'Book not exists',
         error: "NotFound Error"
     },
+
+    ConflictNumber: {
+        statusCode: 409,
+        message: ' Number already exists',
+        error: "Conflict Error"
+    },
 }

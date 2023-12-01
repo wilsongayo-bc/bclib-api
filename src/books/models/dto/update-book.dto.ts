@@ -21,13 +21,16 @@ export class UpdateBookDto {
     @IsNotEmptyObject({ nullable: false })
     accession: Accession
 
-    number: number;
+    @IsNotEmpty()
+    number: string;
 
     author_number: string;
 
     classification: string;
      
     title: string;
+
+    quantity: number;
 
     edition: string;
     
