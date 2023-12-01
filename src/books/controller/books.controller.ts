@@ -25,9 +25,15 @@ export class BooksController {
   async getAllBooks(): Promise<Book[]> {
       return this.booksService.getAllBooks();
   }
+
   @Get('/enabled')
   async getAllEnabled(): Promise<Book[]> {
       return this.booksService.getAllEnabled();
+  }
+
+  @Get('/group-by-name')
+  async getAllGroupByName(): Promise<Book[]> {
+      return this.booksService.getAllGroupByName();
   }
 
   @Get('/:id')
