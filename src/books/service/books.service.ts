@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from '../models/entities/book.entity';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { CreateBookDto } from '../models/dto/create-book.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { BookErrors } from 'src/shared/errors/book/book.errors';
@@ -16,6 +16,7 @@ import { BooksStatus, Status } from 'src/enums/status.enum';
 export class BooksService {
   constructor(
     @InjectRepository(Book) private bookRepository: Repository<Book>,
+    private dataSource: DataSource
   ) {}
 
   async createBook(
@@ -25,7 +26,7 @@ export class BooksService {
     createbookDto.created_by = username;
     createbookDto.updated_by = username;
     createbookDto.title = createbookDto.title.toUpperCase();
-    console.log(createbookDto); // edentify the error
+    
     const bookDB = await this.findBookByNumber(createbookDto.number);
     if (bookDB) {
       throw new NotFoundException(BookErrors.ConflictNumber);
@@ -77,6 +78,22 @@ export class BooksService {
           book_status: BooksStatus.AVAILABLE,
         },
       });
+    } catch (err) {
+      throw new InternalServerErrorException(CommonErrors.ServerError);
+    }
+  }
+
+  async getAllGroupByName(): Promise<Book[]> {
+    try {
+      const booksWithQuantity = await this.dataSource
+        .getRepository(Book)
+        .createQueryBuilder('book')
+        .select(['title', 'COUNT(*) AS quantity'])
+        .where('quantity > 0')
+        .groupBy('book.title')
+        .getRawMany();
+      console.log('DEBUG...', booksWithQuantity);
+      return booksWithQuantity;
     } catch (err) {
       throw new InternalServerErrorException(CommonErrors.ServerError);
     }
