@@ -99,8 +99,10 @@ export class employeeService {
         employee.employee_id = updateemployeeDto.employee_id;
         employee.first_name = updateemployeeDto.first_name;
         employee.last_name = updateemployeeDto.last_name;
+        employee.course = updateemployeeDto.course;
         employee.full_name = updateemployeeDto.full_name; 
         employee.status = updateemployeeDto.status;
+
         employee.updated_by = username;
 
         // Save updated employee
