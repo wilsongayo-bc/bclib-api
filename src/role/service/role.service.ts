@@ -1,7 +1,7 @@
 import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from '../models/entities/role.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateRoleDto } from '../models/dto/create-role.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { UpdateRoleDto } from '../models/dto/update-role.dto';
@@ -55,6 +55,7 @@ export class RoleService {
             return await this.roleRepository.find({
                 where: {
                     status: Status.ENABLED,
+                    role: Not('ADMIN')
                 },
             });
         } catch (err) {

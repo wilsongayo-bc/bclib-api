@@ -28,11 +28,14 @@ export class Book extends BaseEntity {
     @ManyToOne(() => Accession, (accession) => accession)
     accession: Accession
     
-    @Column()
-    number: number;
+    @Column({ unique: true })
+    number: string;
 
     @Column()
     author_number: string;
+
+    @Column()
+    quantity: number;
     
     @Column()
     classification: string; 
