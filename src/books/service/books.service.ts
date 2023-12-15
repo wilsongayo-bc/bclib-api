@@ -26,7 +26,7 @@ export class BooksService {
     createbookDto.created_by = username;
     createbookDto.updated_by = username;
     createbookDto.title = createbookDto.title.toUpperCase();
-    console.log(createbookDto); // edentify the error
+    
     const bookDB = await this.findBookByNumber(createbookDto.number);
     if (bookDB) {
       throw new NotFoundException(BookErrors.ConflictNumber);
@@ -77,6 +77,22 @@ export class BooksService {
           book_status: BooksStatus.AVAILABLE,
         },
       });
+    } catch (err) {
+      throw new InternalServerErrorException(CommonErrors.ServerError);
+    }
+  }
+
+  async getAllGroupByName(): Promise<Book[]> {
+    try {
+      const booksWithQuantity = await this.dataSource
+        .getRepository(Book)
+        .createQueryBuilder('book')
+        .select(['title', 'COUNT(*) AS quantity'])
+        .where('quantity > 0')
+        .groupBy('book.title')
+        .getRawMany();
+      console.log('DEBUG...', booksWithQuantity);
+      return booksWithQuantity;
     } catch (err) {
       throw new InternalServerErrorException(CommonErrors.ServerError);
     }
