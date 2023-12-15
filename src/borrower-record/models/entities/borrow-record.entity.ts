@@ -27,6 +27,9 @@ export class BorrowRecord extends BaseEntity {
     date_returned: Date;
 
     @Column()
+    fee:number;
+
+    @Column()
     remarks:string;
 
     @Column({ type: "enum", enum: BookStatus, default: BookStatus.CHECKEDOUT})

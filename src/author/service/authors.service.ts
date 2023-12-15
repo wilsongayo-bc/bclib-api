@@ -38,6 +38,7 @@ export class AuthorsService {
                 id: true,
                 full_name: true,
                 status: true,
+                number: true,
                 created_at: true,
                 updated_at: true,
                 created_by: true,
@@ -90,6 +91,7 @@ export class AuthorsService {
         // Update author fields
         author.full_name = updateAuthorDto.full_name;
         author.status = updateAuthorDto.status;
+        author.number = updateAuthorDto.number;
         author.updated_by = username;
     
         // Save updated author

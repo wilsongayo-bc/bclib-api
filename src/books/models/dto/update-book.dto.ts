@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsNotEmptyObject } from 'class-validator';
-import { BookStatus, BooksStatus, Status } from 'src/enums/status.enum';
+import { BookStatus, BooksStatus, SourceOfFund, Status } from 'src/enums/status.enum';
 import { Accession, Author, Category, Publisher } from 'src/typeorm';
 
 export class UpdateBookDto {
@@ -21,15 +21,18 @@ export class UpdateBookDto {
     @IsNotEmptyObject({ nullable: false })
     accession: Accession
 
+    @IsEnum(SourceOfFund)
+    source_of_fund: SourceOfFund;
+
     @IsNotEmpty()
     number: string;
 
-    author_number: string;
+   // author_number: string;
 
     classification: string;
      
     title: string;
-
+    
     quantity: number;
 
     edition: string;
@@ -38,11 +41,11 @@ export class UpdateBookDto {
 
     pages: string;
 
-    source_of_fund: string;
+  //  source_of_fund: string;
 
     cost_price: number;
 
-    year: string;
+    year: number;
 
     remarks: string; 
 
