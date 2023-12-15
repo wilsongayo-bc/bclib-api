@@ -4,7 +4,9 @@ import { Status } from 'src/enums/status.enum';
 export class CreateAuthorDto {
     @IsNotEmpty()
     full_name: string;
-
+    
+    author:number;
+    
     @IsEnum(Status)
     status: Status;
 

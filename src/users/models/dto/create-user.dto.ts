@@ -18,10 +18,10 @@ export class CreateUserDto {
 
     @IsNotEmpty()
     password: string;
-    /*
+    
     @IsEnum(UsersRole)
     role: UsersRole; 
-
+    /*
     @IsNotEmptyObject({ nullable: false })
     role: Role*/
 

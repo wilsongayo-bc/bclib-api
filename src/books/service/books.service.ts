@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from '../models/entities/book.entity';
-import { DataSource, Repository } from 'typeorm';
+import { Repository, DataSource } from 'typeorm';
 import { CreateBookDto } from '../models/dto/create-book.dto';
 import { CommonErrors } from 'src/shared/errors/common/common-errors';
 import { BookErrors } from 'src/shared/errors/book/book.errors';
@@ -45,9 +45,7 @@ export class BooksService {
         select: {
           id: true,
           //name: true,
-          description: true,
-          book_status: true,
-          author_number: true,
+         // author_number: true,
           classification: true,
           title: true,
           edition: true,
@@ -57,6 +55,7 @@ export class BooksService {
           cost_price: true,
           number: true,
           quantity: true,
+          book_status:true,
           year: true,
           remarks: true,
           created_at: true,
@@ -136,7 +135,7 @@ export class BooksService {
     book.publisher = updateBookDto.publisher;
     book.accession = updateBookDto.accession;
     book.number = updateBookDto.number;
-    book.author_number = updateBookDto.author_number;
+   // book.author_number = updateBookDto.author_number;
     book.classification = updateBookDto.classification;
     book.title = updateBookDto.title;
     book.edition = updateBookDto.edition;
@@ -152,6 +151,22 @@ export class BooksService {
     // Save updated book
     await this.bookRepository.save(book);
     return book;
+  }
+
+  async getAllGroupByName(): Promise<Book[]> {
+    try {
+      const booksWithQuantity = await this.dataSource
+        .getRepository(Book)
+        .createQueryBuilder('book')
+        .select(['title', 'COUNT(*) AS quantity'])
+        .where('quantity > 0')
+        .groupBy('book.title')
+        .getRawMany();
+      console.log('DEBUG...', booksWithQuantity);
+      return booksWithQuantity;
+    } catch (err) {
+      throw new InternalServerErrorException(CommonErrors.ServerError);
+    }
   }
 
   async findBookByNumber(bookNumber: string) {

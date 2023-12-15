@@ -27,7 +27,7 @@ export class CoursesService {
         const course = await this.courseRepository.create(createCourseDto);
         await course.save();
 
-        return course;
+         return course;
     }
 
     /* get all courses */

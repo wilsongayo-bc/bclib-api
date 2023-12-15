@@ -23,6 +23,9 @@ export class CreateBorrowRecordDto {
 
     remarks: string;
 
+    fee: number;
+
+
     @IsEnum(BookStatus)
     books_status: BookStatus;
 

@@ -5,6 +5,8 @@ export class UpdateAuthorDto {
     @IsNotEmpty()
     full_name: string;
 
+    number: number;
+    
     @IsEnum(Status)
     status: Status;
 

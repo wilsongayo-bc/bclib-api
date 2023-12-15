@@ -45,4 +45,8 @@ export class CourseController {
     const updatedCourse = await this.CoursesService.updatecourse(courseId, UpdateCourseDto, user.username);
     return updatedCourse;
   }
+
+
+
+  
 }

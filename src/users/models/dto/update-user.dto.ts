@@ -12,12 +12,12 @@ export class UpdateUserDto {
 
     @IsNotEmpty()
     password: string;
-    /*
+    
     @IsEnum(UsersRole)
-    role: UsersRole; */
-
+    role: UsersRole; 
+    /*
     @IsNotEmptyObject({ nullable: false })
-    role: Role
+    role: Role*/
 
     @IsEnum(Status)
     status: Status;
