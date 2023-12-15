@@ -36,11 +36,6 @@ export class BooksController {
       return this.booksService.getAllEnabled();
   }
 
-  @Get('/group-by-name')
-  async getAllGroupByName(): Promise<Book[]> {
-      return this.booksService.getAllGroupByName();
-  }
-
   @Get('/:id')
   async getBookById(@Param('id') id: number): Promise<Book>{
       return await this.booksService.findBookById(id);
