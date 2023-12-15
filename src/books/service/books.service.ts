@@ -82,22 +82,6 @@ export class BooksService {
     }
   }
 
-  async getAllGroupByName(): Promise<Book[]> {
-    try {
-      const booksWithQuantity = await this.dataSource
-        .getRepository(Book)
-        .createQueryBuilder('book')
-        .select(['title', 'COUNT(*) AS quantity'])
-        .where('quantity > 0')
-        .groupBy('book.title')
-        .getRawMany();
-      console.log('DEBUG...', booksWithQuantity);
-      return booksWithQuantity;
-    } catch (err) {
-      throw new InternalServerErrorException(CommonErrors.ServerError);
-    }
-  }
-
   /* find book by id */
   async findBookById(id: number): Promise<Book> {
     const book = await this.bookRepository.findOne({
