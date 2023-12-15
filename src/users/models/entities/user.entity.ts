@@ -23,11 +23,12 @@ export class User extends BaseEntity {
 
     @Column()
     password: string;
+    
+    @Column({ type: "enum", enum: UsersRole, default: UsersRole.STUDENT })
+    role: UsersRole;
     /*
-    @Column({ type: "enum", enum: UsersRole, default: UsersRole.USER })
-    role: UsersRole; */
     @ManyToOne(() => Role, (role) => role)
-    role: Role
+    role: Role*/
 
     @Column({ type: "enum", enum: Status, default: Status.ENABLED })
     status: Status;

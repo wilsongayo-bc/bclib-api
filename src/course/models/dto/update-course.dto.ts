@@ -1,5 +1,6 @@
 import { IsEnum, IsNotEmpty } from 'class-validator';
 import { Status } from 'src/enums/status.enum';
+import { UpdateDateColumn } from 'typeorm';
 
 export class UpdateCourseDto {
     @IsNotEmpty()
@@ -14,4 +15,7 @@ export class UpdateCourseDto {
     description: string;
 
     updated_by: string;
+
+    @UpdateDateColumn({ name: 'current_time_update' })
+   currentTimeUpdate: Date;
 }

@@ -22,6 +22,8 @@ export class UpdateBorrowRecordDto {
    
     remarks: string;
 
+    fee: number;
+
     @IsEnum(BookStatus)
     books_status: BookStatus;
 

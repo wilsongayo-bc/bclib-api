@@ -17,7 +17,7 @@ export class Course extends BaseEntity {
 
     @Column()
     @CreateDateColumn()
-    created_at: Date;
+    created_at: Date;                                                                                                                                                                                                                                                   
 
     @Column()
     @UpdateDateColumn()
@@ -28,4 +28,7 @@ export class Course extends BaseEntity {
 
     @Column()
     updated_by: string;
-}
+
+    // @UpdateDateColumn({ name: 'current_time_update' })
+    // currentTimeUpdate: Date;
+}  

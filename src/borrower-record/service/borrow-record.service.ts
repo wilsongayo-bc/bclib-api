@@ -43,6 +43,7 @@ export class BorrowRecordService {
                     remarks: true,
                     books_status: true,
                     return_status: true,
+                    fee: true,
                     created_at: true,
                     updated_at: true,
                     created_by: true,
@@ -92,6 +93,7 @@ export class BorrowRecordService {
         BorrowRecord.remarks = updateBorrowRecordDto.remarks;
         BorrowRecord.books_status = updateBorrowRecordDto.books_status;
         BorrowRecord.return_status = updateBorrowRecordDto.return_status;
+        BorrowRecord.fee = updateBorrowRecordDto.fee;
         BorrowRecord.updated_by = username;
 
         // Save updated student

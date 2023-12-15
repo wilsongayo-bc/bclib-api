@@ -1,5 +1,5 @@
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, ManyToOne } from "typeorm";
-import { BookStatus, BooksStatus, Status } from "src/enums/status.enum";
+import { BookStatus, BooksStatus, SourceOfFund, Status } from "src/enums/status.enum";
 import { Author, Category, Publisher, Accession } from "src/typeorm";
 
 @Entity()
@@ -30,10 +30,10 @@ export class Book extends BaseEntity {
     
     @Column({ unique: true })
     number: string;
-
+    /*
     @Column()
     author_number: string;
-
+    */
     @Column()
     quantity: number;
     
@@ -52,14 +52,16 @@ export class Book extends BaseEntity {
     @Column()
     pages: string;
 
-    @Column()
-    source_of_fund: string;
+   // @Column()
+   // source_of_fund: string;
+   @Column({ type: "enum", enum: SourceOfFund, default: SourceOfFund.SCHOOLFUND })
+   source_of_fund: SourceOfFund;
   
     @Column()
     cost_price: number;
 
     @Column()
-    year: string;
+    year: number;
 
     @Column()
     remarks: string; 
