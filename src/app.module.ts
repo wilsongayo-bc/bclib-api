@@ -17,6 +17,7 @@ import { employeeModule } from './employee/employee.module';
 import { AccessionModule } from './accession/accession.module';
 import { RoleModule } from './role/role.module';
 import { ReturnModule } from './Return/return';
+import { ExternalModule } from './external/external.module'; //External ENDPOINT
 
 
 @Module({
@@ -47,7 +48,8 @@ import { ReturnModule } from './Return/return';
     BorrowRecordModule,
     AccessionModule,
     RoleModule,
-    ReturnModule
+    ReturnModule,
+    ExternalModule
   ],
   controllers: [],
   providers: [],
