@@ -29,6 +29,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^9.0.3",
     "@nestjs/platform-express": "^9.4.2",
+    "@nestjs/schedule": "^4.1.1",
     "@nestjs/typeorm": "^10.0.2",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",

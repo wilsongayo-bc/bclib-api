@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import entities from './typeorm';
 
@@ -36,6 +37,7 @@ import { ExternalModule } from './external/external.module'; //External ENDPOINT
       entities,
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
     AuthModule,
     BooksModule,

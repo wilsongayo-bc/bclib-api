@@ -7,7 +7,9 @@ import {
     Logger,
   } from "@nestjs/common";
 import { AxiosResponse } from "axios";
-  import { catchError, lastValueFrom, map, Observable } from "rxjs";
+import { catchError, lastValueFrom, map, Observable } from "rxjs";
+import { Cron } from '@nestjs/schedule';
+
 
 @Injectable()
 export class ExternalService {
@@ -39,4 +41,9 @@ export class ExternalService {
         console.log("dataList...", dataList);
         return dataList;
       }
+
+    @Cron('45 * * * * *')
+    handleCron() {
+      this.logger.debug('Called when the current second is 45');
+    }
 }
